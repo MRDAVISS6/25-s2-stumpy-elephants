@@ -4,10 +4,9 @@ https://discord.gg/GU3AUPqh
 
 Communication/Conflict resolutions:
 - Acknowledge all feedback.
-- Person who wrote code, is responsable for commenting and making it easy to read.
+- The person who wrote a piece of code is responsable for commenting and making that piece easy to read/follow.
 - Ping discord when you've pushed so others know to pull.
 - Respect working hours.
-- 
 
 Checklist - to be revised
 - Do I understand the code I am reading?
