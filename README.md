@@ -6,7 +6,7 @@ Communication/Conflict resolutions:
 - Acknowledge all feedback.
 - The person who wrote a piece of code is responsable for commenting and making that piece easy to read/follow.
 - Ping discord when you've pushed so others know to pull.
-- Respect working hours.
+- Respect working hours - you might not get instant responses during the night
 
 Checklist - to be revised
 - Do I understand the code I am reading?
