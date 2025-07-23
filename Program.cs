@@ -89,13 +89,13 @@ namespace UberProject
         }
     }
 
-    internal class Program
+    public static class Program
     {
         private static Random random = new Random();
         private static int Task;
         public static string charName, cookbook = "";
         static string[] inventory = ["", "", "", "", "", "", "", "", "", ""]; 
-        static string[] foodSatchel = ["", "", "", "", "", "", "", "", "", ""];
+        public static string[] foodSatchel = ["", "", "", "", "", "", "", "", "", ""];
         static Enemies[] monsters =
       {
             new Enemies("Mirelurk", 30, 5, "A mutated crab-like creature with a hard shell and a vicious bite."),
@@ -1306,7 +1306,7 @@ namespace UberProject
             Console.ReadLine();
         }
 
-        static void InvalidInput()
+        public static void InvalidInput()
         {
             Console.WriteLine("Invalid Input");
             Console.ReadLine();
