@@ -26,26 +26,7 @@ namespace FlavoursOfFallout
             return $"Name: {playerName} | HP: {playerHP} | Weapon: {playerWeapon} | Attack: {playerAttack}";
         }
     }
-    public struct Enemies
-    {
-        public string enemyName;
-        public int enemyHP;
-        public int enemyAttack;
-        public string enemyDesc;
-
-        public Enemies(string name, int hp, int attack, string desc)
-        {
-            this.enemyName = name;
-            this.enemyHP = hp;
-            this.enemyAttack = attack;
-            this.enemyDesc = desc;
-        }
-        public override string ToString()
-        {
-            return $"{enemyName} | HP: {enemyHP} | Attack: {enemyAttack} | Description: {enemyDesc}";
-        }
-
-    }
+    
     public struct Weapons()
     {
         public string weaponName;
