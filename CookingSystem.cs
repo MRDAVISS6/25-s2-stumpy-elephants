@@ -1,7 +1,18 @@
-﻿namespace CookingSystem
+﻿using UberProject;
+
+namespace CookingSystem
 {
     internal class CookingSystem
     {
+
+        public struct Recipes()
+        {
+            public string recipeName;
+            public string[] ingredients = new string[2];
+        }
+
+        static string[] foodSatchel = Program.foodSatchel;
+        static string cookbook = Program.cookbook;
         static void GiveItem(string item)
         {
             for (int i = 0; i < foodSatchel.Length; i++)
@@ -48,7 +59,7 @@
                 switch (input)
                 {
                     default:
-                        InvalidInput();
+                        Program.InvalidInput();
                         break;
                     case 0: //Exit inventory
                         Console.WriteLine("Exiting inventory now");
@@ -82,7 +93,7 @@
                 switch (input)
                 {
                     default:
-                        InvalidInput();
+                        Program.InvalidInput();
                         break;
                     case 1:
                         Kitchen();
@@ -140,7 +151,7 @@
 
             for (int i = 0; i < recipes.Length; i++)
             {
-                if (recipes[i].ingredients[0].ToLower() == ingredientsArr[0].ToLower() && recipes[i].ingredients[1].ToLower() == ingredientsArr[1].ToLower() && recipes[i].ingredients[2].ToLower() == ingredientss[2].ToLower())
+                if (recipes[i].ingredients[0].ToLower() == ingredientsArr[0].ToLower() && recipes[i].ingredients[1].ToLower() == ingredientsArr[1].ToLower() && recipes[i].ingredients[2].ToLower() == ingredientsArr[2].ToLower())
                 {
                     RemoveItem(ingredientsArr[0]);
                     RemoveItem(ingredientsArr[1]);
