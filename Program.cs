@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Channels;
 using System.Xml.Linq;
 
-namespace UberProject
+namespace FlavoursOfFallout
 {
     public struct Player
     {
