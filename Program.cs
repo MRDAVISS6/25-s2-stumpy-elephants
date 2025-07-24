@@ -94,10 +94,10 @@ namespace UberProject
         private static Random random = new Random();
         private static int Task;
         public static string charName, cookbook = "";
-        static string[] inventory = ["", "", "", "", "", "", "", "", "", ""]; 
-        static string[] foodSatchel = ["", "", "", "", "", "", "", "", "", ""];
-        static Enemies[] monsters =
-      {
+        static List<string> inventory = ["", "", "", "", "", "", "", "", "", ""]; 
+        static List<string> foodSatchel = ["", "", "", "", "", "", "", "", "", ""];
+        static List<Enemies> monsters = 
+            [
             new Enemies("Mirelurk", 30, 5, "A mutated crab-like creature with a hard shell and a vicious bite."),
             new Enemies("Super Mutant", 40, 8, "A hulking brute with enhanced strength and resilience, often armed with heavy weapons."),
             new Enemies("Deathclaw", 50, 10, "A terrifying predator with razor-sharp claws and incredible speed."),
@@ -114,7 +114,7 @@ namespace UberProject
             new Enemies("Nuke Leech", 18, 3, "A glowing, slug-like parasite that feeds on radiation and attaches to living hosts."),
             new Enemies("Murderous Crow", 22, 4, "A seemingly normal crow with teeth that can cut through ceramic plates"),
             new Enemies("Mutant Bear", 35, 8, "A mutated bear, aggressive and dangerous.")
-    };
+            ];
 
         static void Welcome()
         {
@@ -329,7 +329,7 @@ namespace UberProject
             Console.WriteLine("Russian Steak is now added in your inventory.");
             Thread.Sleep(500);
             cookbook = cookbook + "Russian Steak - Meat, Bread, Potato | ";
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
@@ -338,7 +338,7 @@ namespace UberProject
                 }
             }
 
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
@@ -346,7 +346,7 @@ namespace UberProject
                     break;
                 }
             }
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
@@ -354,7 +354,7 @@ namespace UberProject
                     break;
                 }
             }
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
@@ -386,7 +386,7 @@ namespace UberProject
             Console.WriteLine("2. Solyanka - pickle, lemon, flour");
             cookbook = cookbook + "Borcht - Meat, Onion Potato | ";
             cookbook = cookbook + "Solyanka - Pickle, Lemon, Flour | ";
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
@@ -394,7 +394,7 @@ namespace UberProject
                     break;
                 }
             }
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
@@ -402,7 +402,7 @@ namespace UberProject
                     break;
                 }
             }
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
@@ -410,7 +410,7 @@ namespace UberProject
                     break;
                 }
             }
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
@@ -468,7 +468,7 @@ namespace UberProject
                     AcquireEpicLoot();
                     break;
                 case "r":
-                    for (int i = 0; i < foodSatchel.Length; i++)
+                    for (int i = 0; i < foodSatchel.Count; i++)
                     {
                         if (foodSatchel[i] == "Meat" ||  foodSatchel[i] == "Fish")
                         {
@@ -491,21 +491,21 @@ namespace UberProject
                 $"\none day a messiah would come to save us all, and that {charName} should eat a meal with them");
             Console.ReadLine();
             cookbook = cookbook + "Kutia - Rice, Canned Fruits, Flower Seeds | ";
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
                     foodSatchel[i] = "Rice";
                 }
             }
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
                     foodSatchel[i] = "Canned Fruits";
                 }
             }
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
@@ -557,28 +557,28 @@ namespace UberProject
             Console.WriteLine("Now these recipies are added in your inventory");
             cookbook = cookbook + "Varenniki - Cheese, Potato, Eggs | ";
             cookbook = cookbook + "Beef stroganoff - Meat, Sour Cream, Onions | ";
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
                     foodSatchel[i] = "Cheese";
                 }
             }
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
                     foodSatchel[i] = "Eggs";
                 }
             }
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
                     foodSatchel[i] = "Sour Cream";
                 }
             }
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
@@ -703,7 +703,7 @@ namespace UberProject
             Console.WriteLine("Inventory:");
             Console.WriteLine("Slot | Item");
             Console.WriteLine("---------------");
-            for (int i = 0; i < inventory.Length; i++)
+            for (int i = 0; i < inventory.Count; i++)
             {
                 string item = string.IsNullOrEmpty(inventory[i]) ? "[Empty]" : inventory[i];
                 Console.WriteLine($"{i + 1,4} | {item}");
@@ -727,9 +727,9 @@ namespace UberProject
                     int itemSlot;
                     temp = Console.ReadLine();
                     itemSlot = Convert.ToInt32(temp) - 1;
-                    if (itemSlot >= 0 && itemSlot < inventory.Length && !string.IsNullOrEmpty(inventory[itemSlot]))
+                    if (itemSlot >= 0 && itemSlot < inventory.Count && !string.IsNullOrEmpty(inventory[itemSlot]))
                     {
-                        string[] itemDetails = inventory[itemSlot].Split(" - ");
+                        string[] itemDetails = inventory[itemSlot].Split(" - ");    // Didn't change into a list as the .Split didn't like it
                         if (itemDetails.Length >= 3 && itemDetails[1] == "Healing")
                         {
                             int healAmount = Convert.ToInt32(itemDetails[2]);
@@ -758,7 +758,7 @@ namespace UberProject
                     int weaponSlot;
                     temp = Console.ReadLine();
                     weaponSlot = Convert.ToInt32(temp) - 1;
-                    if (weaponSlot >= 0 && weaponSlot < inventory.Length && !string.IsNullOrEmpty(inventory[weaponSlot]))
+                    if (weaponSlot >= 0 && weaponSlot < inventory.Count && !string.IsNullOrEmpty(inventory[weaponSlot]))
                     {
                         string[] weaponDetails = inventory[weaponSlot].Split(" - ");
                         if (weaponDetails.Length >= 4)
@@ -785,7 +785,7 @@ namespace UberProject
                     int dropSlot;
                     temp = Console.ReadLine();
                     dropSlot = Convert.ToInt32(temp) - 1;
-                    if (dropSlot >= 0 && dropSlot < inventory.Length && !string.IsNullOrEmpty(inventory[dropSlot]))
+                    if (dropSlot >= 0 && dropSlot < inventory.Count && !string.IsNullOrEmpty(inventory[dropSlot]))
                     {
                         inventory[dropSlot] = "";
                     }
@@ -808,8 +808,8 @@ namespace UberProject
         {
             // This will be an Array of Loot that you can randomly acquire through different events and fights.
 
-            Weapons[] weapons =
-            {
+            List<Weapons> weapons =
+            [
                 new Weapons { weaponName = "Rusty Pipe Rifle", weaponDamage = 7, weaponType = "Ranged", weaponRarity = "Common" },
                 new Weapons { weaponName = "Spiked Baseball Bat", weaponDamage = 8, weaponType = "Melee", weaponRarity = "Common" },
                 new Weapons { weaponName = "Radiation Axe", weaponDamage = 9, weaponType = "Melee", weaponRarity = "Common" },
@@ -837,11 +837,11 @@ namespace UberProject
                 new Weapons { weaponName = "Oblivion Hammer", weaponDamage = 28, weaponType = "Melee", weaponRarity = "*Legendary*" },
                 new Weapons { weaponName = "Apocalypse Blade", weaponDamage = 29, weaponType = "Melee", weaponRarity = "*Legendary*" },
                 new Weapons { weaponName = "Mini Nuke Launcher", weaponDamage = 30, weaponType = "Explosive", weaponRarity = "*Legendary*" },
-            };
+            ];
 
 
-            Ingredients[] ingredients =
-            {
+            List<Ingredients> ingredients =
+            [
                 new Ingredients { ingredientName = "Bread" },
                 new Ingredients { ingredientName = "Lettuce" },
                 new Ingredients { ingredientName = "Tomato" },
@@ -862,10 +862,10 @@ namespace UberProject
                 new Ingredients { ingredientName = "Fish" },
                 new Ingredients { ingredientName = "Apple" },
                 new Ingredients { ingredientName = "Mutfruit" }
-            };
+            ];
 
-            Items[] items =
-            {
+            List<Items> items =
+            [
                 new Items { itemName = "Stimpak", itemType = "Healing", itemEffectValue = 20, itemDesc = "A medical kit that heals wounds and restores health." },
                 new Items { itemName = "RadAway", itemType = "Healing", itemEffectValue = 15, itemDesc = "A serum that removes radiation from the body." },
                 new Items { itemName = "Antiseptic Bandage", itemType = "Healing", itemEffectValue = 12, itemDesc = "A bandage soaked in antiseptic, heals minor wounds." },
@@ -876,13 +876,13 @@ namespace UberProject
                 new Items { itemName = "Cryo Grenade", itemType = "Explosive", itemEffectValue = 15, itemDesc = "A grenade that explodes with a freezing blast, slowing enemies." },
                 new Items { itemName = "Purified Water", itemType = "Healing", itemEffectValue = 10, itemDesc = "Clean water that hydrates and restores minor health." },
 
-            };
+            ];
 
             int weaponLootRarity = random.Next(1,101);
             int weaponLoot;
-            int itemLoot1 = random.Next(items.Length);
-            int itemLoot2 = random.Next(items.Length);
-            int ingredientLoot = random.Next(ingredients.Length);
+            int itemLoot1 = random.Next(items.Count);
+            int itemLoot2 = random.Next(items.Count);
+            int ingredientLoot = random.Next(ingredients.Count);
 
             if (weaponLootRarity <= 40)
             {
@@ -907,7 +907,7 @@ namespace UberProject
             Items acquiredItem2 = items[itemLoot2];
             Ingredients acquiredIngredient = ingredients[ingredientLoot];
 
-            for (int i = 0; i < inventory.Length; i++)
+            for (int i = 0; i < inventory.Count; i++)
             {
                 if (inventory[i] == "")
                 {
@@ -944,7 +944,7 @@ namespace UberProject
             Console.WriteLine($"You have received {acquiredItem1.itemName}");
             Thread.Sleep(1000);
 
-            for (int i = 0; i < inventory.Length; i++)
+            for (int i = 0; i < inventory.Count; i++)
             {
                 if (inventory[i] == "")
                 {
@@ -957,7 +957,7 @@ namespace UberProject
             Thread.Sleep(1000);
             Console.WriteLine();
 
-            for (int i = 0; i < inventory.Length; i++)
+            for (int i = 0; i < inventory.Count; i++)
             {
                 if (inventory[i] == "")
                 {
@@ -977,8 +977,8 @@ namespace UberProject
 
             int modifier = i * 2;
 
-            Enemies[] monsters =
-        {
+            List<Enemies> monsters =
+        [
             new Enemies("Mirelurk", 4*modifier, 7, "A mutated crab-like creature with a hard shell and a vicious bite."),
             new Enemies("Super Mutant",3*modifier , 8, "A hulking brute with enhanced strength and resilience, often armed with heavy weapons."),
             new Enemies("Deathclaw", 5*modifier, 10, "A terrifying predator with razor-sharp claws and incredible speed."),
@@ -994,9 +994,9 @@ namespace UberProject
             new Enemies("Bone Dragger", 3*modifier, 5, "Lurks in the shadows, dragging scavenged bones across the ground to lure victims."),
             new Enemies("Nuke Leech", 2*modifier, 5, "A glowing, slug-like parasite that feeds on radiation and attaches to living hosts."),
             new Enemies("Murderous Crow", 2*modifier, 4, "A seemingly normal crow with teeth that can cut through ceramic plates")
-        };
+        ];
 
-            int enemyNumber = random.Next(monsters.Length);
+            int enemyNumber = random.Next(monsters.Count);
 
             return monsters[enemyNumber];
 
@@ -1083,8 +1083,8 @@ namespace UberProject
                 {
                     case "1":
                         // Display all enemies in a readable format
-                        Enemies[] monsters =
-                        {
+                        List<Enemies> monsters =
+                        [
                             new Enemies("Mirelurk", 30, 5, "A mutated crab-like creature with a hard shell and a vicious bite."),
                             new Enemies("Super Mutant", 40, 8, "A hulking brute with enhanced strength and resilience, often armed with heavy weapons."),
                             new Enemies("Deathclaw", 50, 10, "A terrifying predator with razor-sharp claws and incredible speed."),
@@ -1099,7 +1099,7 @@ namespace UberProject
                             new Enemies("Toxic Spitter", 22, 5, "A bloated mutant that expels corrosive bile from a distended jaw."),
                             new Enemies("Bone Dragger", 26, 5, "Lurks in the shadows, dragging scavenged bones across the ground to lure victims."),
                             new Enemies("Nuke Leech", 18, 3, "A glowing, slug-like parasite that feeds on radiation and attaches to living hosts.")
-                        };
+                        ];
                         Console.WriteLine("Monsters in the game:\n");
                         foreach (var enemy in monsters)
                         {
@@ -1111,42 +1111,42 @@ namespace UberProject
 
                     case "2":
                         // Display all weapons in a readable format
-                        Weapons[] tier1weapons =
-                        {
+                        List<Weapons> tier1weapons =
+                        [
                             new Weapons { weaponName = "Rusty Pipe Rifle", weaponDamage = 12, weaponType = "Ranged" },
                             new Weapons { weaponName = "Spiked Baseball Bat", weaponDamage = 10, weaponType = "Melee" },
                             new Weapons { weaponName = "Radiation Axe", weaponDamage = 14, weaponType = "Melee" },
                             new Weapons { weaponName = "Jury-Rigged Laser Pistol", weaponDamage = 16, weaponType = "Energy" },
                             new Weapons { weaponName = "Toxic Syringe Gun", weaponDamage = 13, weaponType = "Ranged" },
                             new Weapons { weaponName = "Electrified Machete", weaponDamage = 17, weaponType = "Melee" }
-                        };
-                        Weapons[] tier2weapons =
-                        {
+                        ];
+                        List<Weapons> tier2weapons =
+                        [
                             new Weapons { weaponName = "Hunting Rifle", weaponDamage = 25, weaponType = "Ranged" },
                             new Weapons { weaponName = "Sawblade Launcher", weaponDamage = 30, weaponType = "Ranged" },
                             new Weapons { weaponName = "Combat Shotgun", weaponDamage = 30, weaponType = "Ranged" },
                             new Weapons { weaponName = "Flamer", weaponDamage = 35, weaponType = "Heavy" },
                             new Weapons { weaponName = "Super Sledge", weaponDamage = 28, weaponType = "Melee" },
                             new Weapons { weaponName = "Laser Musket", weaponDamage = 32, weaponType = "Energy" },
-                        };
-                        Weapons[] tier3weapons =
-                        {
+                        ];
+                        List<Weapons> tier3weapons =
+                        [
                             new Weapons { weaponName = "Experimental Gauss Rifle", weaponDamage = 55, weaponType = "Energy" },
                             new Weapons { weaponName = "Tesla Cannon", weaponDamage = 65, weaponType = "Energy" },
                             new Weapons { weaponName = "Incendiary Chainsaw", weaponDamage = 50, weaponType = "Melee" },
                             new Weapons { weaponName = "Cryolator", weaponDamage = 60, weaponType = "Energy" },
                             new Weapons { weaponName = "Railway Rifle", weaponDamage = 58, weaponType = "Ranged" },
                             new Weapons { weaponName = "Auto-Axe", weaponDamage = 52, weaponType = "Melee" }
-                        };
-                        Weapons[] tier4weapons =
-                        {
+                        ];
+                        List<Weapons> tier4weapons =
+                        [
                             new Weapons { weaponName = "Mini Nuke Launcher", weaponDamage = 100, weaponType = "Explosive" },
                             new Weapons { weaponName = "Plague Injector", weaponDamage = 80, weaponType = "Ranged" },
                             new Weapons { weaponName = "Hellfire Minigun", weaponDamage = 90, weaponType = "Heavy" },
                             new Weapons { weaponName = "Quantum Disruptor", weaponDamage = 110, weaponType = "Energy" },
                             new Weapons { weaponName = "Oblivion Hammer", weaponDamage = 95, weaponType = "Melee" },
                             new Weapons { weaponName = "Apocalypse Blade", weaponDamage = 105, weaponType = "Melee" },
-                        };
+                        ];
 
                         Console.WriteLine("Weapons in the game:\n");
 
@@ -1189,8 +1189,8 @@ namespace UberProject
 
                     case "3":
                         // Display all items in a readable format
-                        Items[] items =
-                        {
+                        List<Items> items =
+                        [
                             new Items { itemName = "Stimpak", itemType = "Healing", itemEffectValue = 20, itemDesc = "A medical kit that heals wounds and restores health." },
                             new Items { itemName = "RadAway", itemType = "Healing", itemEffectValue = 15, itemDesc = "A serum that removes radiation from the body." },
                             new Items { itemName = "Antiseptic Bandage", itemType = "Healing", itemEffectValue = 12, itemDesc = "A bandage soaked in antiseptic, heals minor wounds." },
@@ -1200,7 +1200,7 @@ namespace UberProject
                             new Items { itemName = "Dynamite Bundle", itemType = "Explosive", itemEffectValue = 30, itemDesc = "A bundle of dynamite sticks, causes a large explosion." },
                             new Items { itemName = "Cryo Grenade", itemType = "Explosive", itemEffectValue = 15, itemDesc = "A grenade that explodes with a freezing blast, slowing enemies." },
                             new Items { itemName = "Purified Water", itemType = "Healing", itemEffectValue = 10, itemDesc = "Clean water that hydrates and restores minor health." },
-                        };
+                        ];
 
                         Console.WriteLine("Items in the game:\n");
                         foreach (var item in items)
@@ -1213,8 +1213,8 @@ namespace UberProject
 
                     case "4":
                         // Display all ingredients in a readable format
-                        Ingredients[] ingredients =
-                        {
+                        List<Ingredients> ingredients =
+                        [
                             new Ingredients { ingredientName = "Bread" },
                             new Ingredients { ingredientName = "Lettuce" },
                             new Ingredients { ingredientName = "Tomato" },
@@ -1235,7 +1235,7 @@ namespace UberProject
                             new Ingredients { ingredientName = "Fish" },
                             new Ingredients { ingredientName = "Apple" },
                             new Ingredients { ingredientName = "Mutfruit" }
-                        };
+                        ];
                         Console.WriteLine("Ingredients in the game:\n");
                         foreach (var ingredient in ingredients)
                         {
@@ -1247,8 +1247,8 @@ namespace UberProject
 
                     case "5":
                         // Display all recipes in a readable format
-                        Recipes[] recipes =
-                        {
+                        List<Recipes> recipes =
+                        [
                             new Recipes { recipeName = "Russian Steak", ingredient1 = "Meat", ingredient2 = "Potato", ingredient3 = "Butter" },
                             new Recipes { recipeName = "Nuka-Cola Cake", ingredient1 = "Flour", ingredient2 = "Sugar", ingredient3 = "Nuka-Cola" },
                             new Recipes { recipeName = "Mutfruit Salad", ingredient1 = "Mutfruit", ingredient2 = "Lettuce", ingredient3 = "Tomato" },
@@ -1269,7 +1269,7 @@ namespace UberProject
                             new Recipes { recipeName = "Mutfruit Jam Toast", ingredient1 = "Toast", ingredient2 = "Mutfruit", ingredient3 = "Jam" },
                             new Recipes { recipeName = "Rad-X Smoothie", ingredient1 = "Rad-X", ingredient2 = "Milk", ingredient3 = "Mutfruit" },
                             new Recipes { recipeName = "Pepper Steak", ingredient1 = "Meat", ingredient2 = "Pepper", ingredient3 = "Butter" }
-                        };
+                        ];
                         Console.WriteLine("Recipes in the game:\n");
                         foreach (var recipe in recipes)
                         {
@@ -1343,7 +1343,7 @@ namespace UberProject
                         break;
                     case 2: //Shows you your inventory
                         Console.WriteLine("Food satchel:");
-                        for (int i = 0; i < foodSatchel.Length; i++)
+                        for (int i = 0; i < foodSatchel.Count; i++)
                         {
                             Console.WriteLine(foodSatchel[i]);
                         }
@@ -1400,7 +1400,7 @@ namespace UberProject
                     case 1: //Cooking tier 1 recipies
                         Console.Clear();
                         Console.WriteLine("Food satchel:");
-                        for (int i = 0; i < foodSatchel.Length; i++)
+                        for (int i = 0; i < foodSatchel.Count; i++)
                         {
                             Console.WriteLine(foodSatchel[i]);
                         }
@@ -1412,7 +1412,7 @@ namespace UberProject
                     case 2: //Cooking tier 2 recipies
                         Console.Clear();
                         Console.WriteLine("Food satchel:");
-                        for (int i = 0; i < foodSatchel.Length; i++)
+                        for (int i = 0; i < foodSatchel.Count; i++)
                         {
                             Console.WriteLine(foodSatchel[i]);
                         }
@@ -1426,7 +1426,7 @@ namespace UberProject
                     case 3: //Cooking tier 3 recipies
                         Console.Clear();
                         Console.WriteLine("Food satchel:");
-                        for (int i = 0; i < foodSatchel.Length; i++)
+                        for (int i = 0; i < foodSatchel.Count; i++)
                         {
                             Console.WriteLine(foodSatchel[i]);
                         }
@@ -1454,7 +1454,7 @@ namespace UberProject
             //Toast
             if (ingredient1 == "bread")
             {
-                for (int i = 0; i < foodSatchel.Length; i++)
+                for (int i = 0; i < foodSatchel.Count; i++)
                 {
                     if (foodSatchel[i] == "")
                     {
@@ -1467,7 +1467,7 @@ namespace UberProject
             //Boiling Water
             else if (ingredient1 == "drinkable water")
             {
-                for (int i = 0; i < foodSatchel.Length; i++)
+                for (int i = 0; i < foodSatchel.Count; i++)
                 {
                     if (foodSatchel[i] == "")
                     {
@@ -1489,7 +1489,7 @@ namespace UberProject
             //Salad
             if (ingredient1 == "lettuce" && ingredient2 == "lettuce") //Conditions (Must be in order)
             {
-                for (int i = 0; i < foodSatchel.Length; i++)
+                for (int i = 0; i < foodSatchel.Count; i++)
                 {
                     if (foodSatchel[i] == "") //First instance of ingredient
                     {
@@ -1499,7 +1499,7 @@ namespace UberProject
             }
             else if (ingredient1 == "toast" && ingredient2 == "jam")
             {
-                for (int i = 0;i < foodSatchel.Length; i++)
+                for (int i = 0;i < foodSatchel.Count; i++)
                 {
                     if (foodSatchel[i] == "")
                     {
@@ -1518,7 +1518,7 @@ namespace UberProject
         {
             if (ingredient1 == "bread" && ingredient2 == "lettuce" && ingredient3 == "bread")
             {
-                for (int i = 0; i < foodSatchel.Length; i++)
+                for (int i = 0; i < foodSatchel.Count; i++)
                 { //Adds sandwich
                     if (foodSatchel[i] == "")
                     {
@@ -1530,7 +1530,7 @@ namespace UberProject
             }
             if (ingredient1 == "meat" && ingredient2 == "bread" && ingredient3 == "potato")
             {
-                for (int i = 0; i < foodSatchel.Length; i++)
+                for (int i = 0; i < foodSatchel.Count; i++)
                 { //Adds Russian Steak
                     if (foodSatchel[i] == "")
                     {
@@ -1542,7 +1542,7 @@ namespace UberProject
             }
             else if (ingredient1 == "meat" && ingredient2 == "onion" && ingredient3 == "potato")
             {
-                for (int i = 0; i < foodSatchel.Length; i++)
+                for (int i = 0; i < foodSatchel.Count; i++)
                 { //Adds borscht
                     if (foodSatchel[i] == "Meat")
                     {
@@ -1554,7 +1554,7 @@ namespace UberProject
             }
             else if (ingredient1 == "cheese" && ingredient2 == "potato" && ingredient3 == "eggs")
             {
-                for (int i = 0; i < foodSatchel.Length; i++)
+                for (int i = 0; i < foodSatchel.Count; i++)
                 { //Adds Varenniki
                     if (foodSatchel[i] == "Cheese")
                     {
@@ -1566,7 +1566,7 @@ namespace UberProject
             }
             else if (ingredient1 == "meat" && ingredient2 == "sour cream" && ingredient3 == "onions")
             {
-                for (int i = 0; i < foodSatchel.Length; i++)
+                for (int i = 0; i < foodSatchel.Count; i++)
                 { //Adds Beef Stroganoff
                     if (foodSatchel[i] == "")
                     {
@@ -1578,7 +1578,7 @@ namespace UberProject
             }
             else if (ingredient1 == "pickle" && ingredient2 == "lemon" && ingredient3 == "flour")
             {
-                for (int i = 0; i < foodSatchel.Length; i++)
+                for (int i = 0; i < foodSatchel.Count; i++)
                 { //Adds solyanka
                     if (foodSatchel[i] == "")
                     {
@@ -1590,7 +1590,7 @@ namespace UberProject
             }
             else if (ingredient1 == "rice" && ingredient2 == "canned fruits" && ingredient3 == "flower seeds")
             {
-                for (int i = 0; i < foodSatchel.Length; i++)
+                for (int i = 0; i < foodSatchel.Count; i++)
                 { //Adds Kutia
                     if (foodSatchel[i] == "")
                     {
