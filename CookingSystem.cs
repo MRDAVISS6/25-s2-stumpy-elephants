@@ -51,40 +51,38 @@ namespace CookingSystem
         public static void InventoryManage()
         {
             string temp;
-            int input;
+            int input = 2;
             Console.Clear();
             do
             {
                 Console.WriteLine("This is your food inventory.\nPress 1 to cook ingredients\nPress 2 to read out your inventory\n\nPress 0 to exit the food inventory"); //Menu text
                 temp = Console.ReadLine();
-                input = Convert.ToInt32(temp);
 
-                //if (string.IsNullOrWhiteSpace(temp) || !int.TryParse(temp, out input))
-                //{
-                //    Console.WriteLine("Invalid input, please enter a number.");
-                //    Thread.Sleep(1000);
-                //    continue;
-                //}
-
-                switch (input)
+                while (string.IsNullOrWhiteSpace(temp) || !int.TryParse(temp, out input))
                 {
-                    default:
-                        Program.InvalidInput();
-                        break;
-                    case 0: //Exit inventory
-                        Console.WriteLine("Exiting inventory now");
-                        break;
-                    case 1: //Scavenges for ingredients and puts it in an empty slot in your inventory
-                        Kitchen();
-                        break;
-                    case 2: //Shows you your inventory
-                        Console.WriteLine("Food satchel:");
-                        DisplayFoodSatchel();
-                        Console.WriteLine("-- End of food inventory. Press enter to go back to menu");
-                        Console.ReadLine();
-                        Console.Clear();
-                        break;
+                    Console.WriteLine("Invalid input, please enter a valid number.");
+                    temp = Console.ReadLine();
                 }
+
+                    switch (input)
+                    {
+                        default:
+                            Program.InvalidInput();
+                            break;
+                        case 0: //Exit inventory
+                            Console.WriteLine("Exiting inventory now");
+                            break;
+                        case 1: //Scavenges for ingredients and puts it in an empty slot in your inventory
+                            Kitchen();
+                            break;
+                        case 2: //Shows you your inventory
+                            Console.WriteLine("Food satchel:");
+                            DisplayFoodSatchel();
+                            Console.WriteLine("-- End of food inventory. Press enter to go back to menu");
+                            Console.ReadLine();
+                            Console.Clear();
+                            break;
+                    }
                 Console.Clear();
             } while (input != 0);
         }
