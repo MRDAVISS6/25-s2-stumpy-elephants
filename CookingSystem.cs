@@ -161,15 +161,15 @@ namespace CookingSystem
                     }
                     else
                     {
-                        if (i >= recipes.Length - 1)
+                        if (ingredientsArr[0] == "")
+                        {
+                            validRecipe = true;
+                        }
+                        else if (i >= recipes.Length - 1)
                         {
                             Console.WriteLine("I don't know what to do with this!");
                             Console.ReadLine();
                             ingredientsInput(ref ingredientsArr);
-                        }
-                        else if (ingredientsArr[0] == "")
-                        {
-                            validRecipe = true;
                         }
                     }
                 }
