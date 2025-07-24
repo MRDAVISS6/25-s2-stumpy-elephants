@@ -2,7 +2,7 @@
 
 namespace CookingSystem
 {
-    internal class CookingSystem
+    public class CookingSys
     {
 
         public struct Recipes()
@@ -28,8 +28,6 @@ namespace CookingSystem
         {
             for (int i = 0; i < foodSatchel.Length; i++)
             {
-                Console.WriteLine(item);
-                Console.ReadLine();
                 if (foodSatchel[i] == item)
                 {
                     foodSatchel[i] = "";
@@ -38,23 +36,35 @@ namespace CookingSystem
             }
         }
 
-        static void InventoryManage()
+        static void DisplayFoodSatchel()
+        {
+            Console.WriteLine("Food Ingredients:");
+            Console.WriteLine("Slot | Item");
+            Console.WriteLine("---------------");
+            for (int i = 0; i < foodSatchel.Length; i++)
+            {
+                string item = string.IsNullOrEmpty(foodSatchel[i]) ? "[Empty]" : foodSatchel[i];
+                Console.WriteLine($"{i + 1,4} | {item}");
+            }
+        }
+
+        public static void InventoryManage()
         {
             string temp;
             int input;
             Console.Clear();
             do
             {
-                Console.WriteLine("Hello. This is your food inventory.\nPress 1 to cook ingredients\nPress 2 to read out your inventory\n\nPress 0 to close the program"); //Menu text
+                Console.WriteLine("This is your food inventory.\nPress 1 to cook ingredients\nPress 2 to read out your inventory\n\nPress 0 to exit the food inventory"); //Menu text
                 temp = Console.ReadLine();
                 input = Convert.ToInt32(temp);
 
-                if (string.IsNullOrWhiteSpace(temp) || !int.TryParse(temp, out input))
-                {
-                    Console.WriteLine("Invalid input, please enter a number.");
-                    Thread.Sleep(1000);
-                    continue;
-                }
+                //if (string.IsNullOrWhiteSpace(temp) || !int.TryParse(temp, out input))
+                //{
+                //    Console.WriteLine("Invalid input, please enter a number.");
+                //    Thread.Sleep(1000);
+                //    continue;
+                //}
 
                 switch (input)
                 {
@@ -65,14 +75,11 @@ namespace CookingSystem
                         Console.WriteLine("Exiting inventory now");
                         break;
                     case 1: //Scavenges for ingredients and puts it in an empty slot in your inventory
-                        Cooking();
+                        Kitchen();
                         break;
                     case 2: //Shows you your inventory
                         Console.WriteLine("Food satchel:");
-                        for (int i = 0; i < foodSatchel.Length; i++)
-                        {
-                            Console.WriteLine(foodSatchel[i]);
-                        }
+                        DisplayFoodSatchel();
                         Console.WriteLine("-- End of food inventory. Press enter to go back to menu");
                         Console.ReadLine();
                         Console.Clear();
@@ -82,64 +89,55 @@ namespace CookingSystem
             } while (input != 0);
         }
 
-        static void Cooking()
-        {
-            int input;
-            Console.Clear();
-            do
-            {
-                Console.WriteLine("You are now in the cooking menu. What would you like to do?\n1. Start cooking\n2. Read cookbook\n0. Go back to food inventory");
-                input = Convert.ToInt32(Console.ReadLine());
-                switch (input)
-                {
-                    default:
-                        Program.InvalidInput();
-                        break;
-                    case 1:
-                        Kitchen();
-                        break;
-                    case 2:
-                        Console.WriteLine($"{cookbook}\n\n-- Press enter to go back");
-                        Console.ReadLine();
-                        break;
-                    case 0:
-                        break;
-                }
-                Console.Clear();
-            } while (input != 0);
-        }
-
         static void Kitchen()
         {
-            string ingredientSlot1, ingredientSlot2, ingredientSlot3;
             string[] ingredientsArr = new string[3];
-            Console.Clear();
-            Console.WriteLine("Food satchel:");
-            for (int i = 0; i < foodSatchel.Length; i++)
-            {
-                Console.WriteLine(foodSatchel[i]);
-            }
-            Console.WriteLine($"Cookbook:\n{cookbook}");
-            Console.ReadLine();
-            Console.WriteLine("What is the first ingredient you would like to use?");
-            ingredientSlot1 = Console.ReadLine();
-            Console.WriteLine("What is the second ingredient you would like to use?");
-            ingredientSlot2 = Console.ReadLine();
-            Console.WriteLine("What is the third ingredient you would like to use?");
-            ingredientSlot3 = Console.ReadLine();
-            ingredientsArr[0] = ingredientSlot1;
-            ingredientsArr[1] = ingredientSlot2;
-            ingredientsArr[2] = ingredientSlot3;
+            ingredientsInput(ref  ingredientsArr);
             Oven(ref ingredientsArr);
             Console.Clear();
         }
+
+        static void ingredientsInput(ref string[] ingredientsArr) //TODO: Make it so you cannot enter in the same slot multiple times
+        {
+            Console.Clear();
+            int input;
+            bool validInput;
+            Console.WriteLine($"Cookbook:\n{cookbook}");
+            DisplayFoodSatchel();
+            Console.WriteLine("NOTE: Input 0 for a blank input. Input all 0's twice to exit without making anything (You will have to do another round of ingredient entry for it to take effect. I'm working on it)");
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine($"Enter the slot number of ingredient {i+1}:");
+                do
+                {
+                    validInput = int.TryParse(Console.ReadLine(), out input);
+                    if (!validInput)
+                    {
+                        Program.InvalidInput();
+                    }
+                } while (!validInput);
+
+                if (input == 0)
+                {
+                    ingredientsArr[i] = "";
+                }
+                else if (input > foodSatchel.Length || input < 0)
+                {
+                    Program.InvalidInput();
+                }
+                else
+                {
+                    ingredientsArr[i] = foodSatchel[input-1];
+                }
+            }
+        }
         static void Oven(ref string[] ingredientsArr)
         {
+            bool validRecipe = false;
             Recipes[] recipes =
             {
                            new Recipes { recipeName = "Toast", ingredients = new string[] { "Bread", "", "" } },
                            new Recipes { recipeName = "Boiling Water", ingredients = new string[] {"Drinkable-Water", "", "" } },
-                           new Recipes { recipeName = "Salad", ingredients = new string[] {"Lettuce", "Lettuce", "" } },
                            new Recipes { recipeName = "Jam Toast", ingredients = new string[] {"Toast", "Jam", "" } },
                            new Recipes { recipeName = "Russian Steak", ingredients = new string[] {"Meat", "Bread", "Potato" } },
                            new Recipes { recipeName = "Borscht", ingredients = new string[] {"Meat", "Onion", "Potato" } },
@@ -148,17 +146,37 @@ namespace CookingSystem
                            new Recipes { recipeName = "Solyanka", ingredients = new string[] {"Pickle", "Lemon", "Flour" } },
                            new Recipes { recipeName = "Kutia", ingredients = new string[] {"Rice", "Canned-Fruit", "Flower-Seeds" } },
             };
-
-            for (int i = 0; i < recipes.Length; i++)
+            do
             {
-                if (recipes[i].ingredients[0].ToLower() == ingredientsArr[0].ToLower() && recipes[i].ingredients[1].ToLower() == ingredientsArr[1].ToLower() && recipes[i].ingredients[2].ToLower() == ingredientsArr[2].ToLower())
+                for (int i = 0; i < recipes.Length; i++)
                 {
-                    RemoveItem(ingredientsArr[0]);
-                    RemoveItem(ingredientsArr[1]);
-                    RemoveItem(ingredientsArr[2]);
-                    GiveItem(recipes[i].recipeName);
+                    if (recipes[i].ingredients[0] == ingredientsArr[0] && recipes[i].ingredients[1] == ingredientsArr[1] && recipes[i].ingredients[2] == ingredientsArr[2])
+                    {
+                        validRecipe = true;
+                        RemoveItem(ingredientsArr[0]);
+                        RemoveItem(ingredientsArr[1]);
+                        RemoveItem(ingredientsArr[2]);
+                        GiveItem(recipes[i].recipeName);
+                        Console.WriteLine($"You successfully made {recipes[i].recipeName}!");
+                        Console.ReadLine();
+                        break;
+                    }
+                    else
+                    {
+                        if (i >= recipes.Length - 1)
+                        {
+                            Console.WriteLine("I don't know what to do with this!");
+                            Console.ReadLine();
+                            ingredientsInput(ref ingredientsArr);
+                        }
+                        else if (ingredientsArr[0] == "")
+                        {
+                            validRecipe = true;
+                        }
+                    }
                 }
-            }
+            } while (!validRecipe);
+            
         }
 
     }

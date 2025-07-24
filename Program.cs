@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Metrics;
+﻿using CookingSystem;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Numerics;
 using System.Runtime.Intrinsics.X86;
@@ -365,7 +366,7 @@ namespace UberProject
 
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            InventoryManage();
+            CookingSys.InventoryManage();
 
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
@@ -420,7 +421,7 @@ namespace UberProject
             }
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            InventoryManage();
+            CookingSys.InventoryManage();
 
 
             Console.WriteLine("Press any button to continue...");
@@ -515,7 +516,7 @@ namespace UberProject
             Console.WriteLine("Kutia was added to your cookbook");
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            InventoryManage();
+            CookingSys.InventoryManage();
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
             
@@ -589,7 +590,7 @@ namespace UberProject
             Console.WriteLine("Press any key to continue...");
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            InventoryManage();
+            CookingSys.InventoryManage();
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
 
@@ -1310,301 +1311,6 @@ namespace UberProject
         {
             Console.WriteLine("Invalid Input");
             Console.ReadLine();
-        }
-
-        static void InventoryManage()
-        {
-            string temp;
-            int input;
-            Console.Clear();
-            do
-            {
-                Console.WriteLine("Hello. This is your food inventory.\nPress 1 to cook ingredients\nPress 2 to read out your inventory\n\nPress 0 to close the program"); //Menu text
-                temp = Console.ReadLine();
-                input =Convert.ToInt32(temp);
-
-                if (string.IsNullOrWhiteSpace(temp) || !int.TryParse(temp, out input))
-                {
-                    Console.WriteLine("Invalid input, please enter a number.");
-                    Thread.Sleep(1000);
-                    continue;
-                }
-
-                switch (input)
-                {
-                    default:
-                        InvalidInput();
-                        break;
-                    case 0: //Exit inventory
-                        Console.WriteLine("Exiting inventory now");
-                        break;
-                    case 1: //Scavenges for ingredients and puts it in an empty slot in your inventory
-                        Cooking();
-                        break;
-                    case 2: //Shows you your inventory
-                        Console.WriteLine("Food satchel:");
-                        for (int i = 0; i < foodSatchel.Length; i++)
-                        {
-                            Console.WriteLine(foodSatchel[i]);
-                        }
-                        Console.WriteLine("-- End of food inventory. Press enter to go back to menu");
-                        Console.ReadLine();
-                        Console.Clear();
-                        break;
-                }
-                Console.Clear();
-            } while (input != 0);
-        }
-
-        static void Cooking()
-        {
-            int input;
-            Console.Clear();
-            do
-            {
-                Console.WriteLine("You are now in the cooking menu. What would you like to do?\n1. Start cooking\n2. Read cookbook\n0. Go back to food inventory");
-                input = Convert.ToInt32(Console.ReadLine());
-                switch (input)
-                {
-                    default:
-                        InvalidInput();
-                        break;
-                    case 1:
-                        Kitchen();
-                        break;
-                    case 2:
-                        Console.WriteLine($"{cookbook}\n\n-- Press enter to go back");
-                        Console.ReadLine();
-                        break;
-                    case 0:
-                        break;
-                }
-                Console.Clear();
-            } while (input != 0);
-        }
-
-        static void Kitchen()
-        {
-            int input;
-            string ingredientSlot1, ingredientSlot2, ingredientSlot3;
-            Console.Clear();
-            do
-            {
-                Console.WriteLine("What tier recipie do you want to make?\n1. Tier 1 recipie\n2. Tier 2 recipie\n3. Tier 3 recipie\n\n0. Go back to cooking menu");
-                input = Convert.ToInt32(Console.ReadLine());
-                switch (input)
-                {
-                    default:
-                        InvalidInput();
-                        break;
-                    case 1: //Cooking tier 1 recipies
-                        Console.Clear();
-                        Console.WriteLine("Food satchel:");
-                        for (int i = 0; i < foodSatchel.Length; i++)
-                        {
-                            Console.WriteLine(foodSatchel[i]);
-                        }
-                        Console.WriteLine($"Cookbook:\n{cookbook}");
-                        Console.WriteLine("What ingredient would you like to use?");
-                        ingredientSlot1 = Console.ReadLine().ToLower();
-                        tierOne(ingredientSlot1);
-                        break;
-                    case 2: //Cooking tier 2 recipies
-                        Console.Clear();
-                        Console.WriteLine("Food satchel:");
-                        for (int i = 0; i < foodSatchel.Length; i++)
-                        {
-                            Console.WriteLine(foodSatchel[i]);
-                        }
-                        Console.WriteLine($"Cookbook:\n{cookbook}");
-                        Console.WriteLine("What is the first ingredient you would like to use?");
-                        ingredientSlot1 = Console.ReadLine().ToLower();
-                        Console.WriteLine("What is the second ingredient you would like to use?");
-                        ingredientSlot2 = Console.ReadLine().ToLower();
-                        tierTwo(ingredientSlot1, ingredientSlot2);
-                        break;
-                    case 3: //Cooking tier 3 recipies
-                        Console.Clear();
-                        Console.WriteLine("Food satchel:");
-                        for (int i = 0; i < foodSatchel.Length; i++)
-                        {
-                            Console.WriteLine(foodSatchel[i]);
-                        }
-                        Console.WriteLine($"Cookbook:\n{cookbook}");
-                        Console.WriteLine("Ingredients need to be entered in the correct order.");
-                        Console.WriteLine("What is the first ingredient you would like to use?");
-                        ingredientSlot1 = Console.ReadLine().ToLower();
-                        Console.WriteLine("What is the second ingredient you would like to use?");
-                        ingredientSlot2 = Console.ReadLine().ToLower();
-                        Console.WriteLine("What is the third ingredient you would like to use?");
-                        ingredientSlot3 = Console.ReadLine().ToLower();
-                        tierThree(ingredientSlot1, ingredientSlot2, ingredientSlot3);
-                        break;
-                    case 0:
-                        break;
-                }
-                Console.Clear();
-            } while (input != 0);
-
-
-        }
-
-        static void tierOne(string ingredient1)
-        {
-            //Toast
-            if (ingredient1 == "bread")
-            {
-                for (int i = 0; i < foodSatchel.Length; i++)
-                {
-                    if (foodSatchel[i] == "")
-                    {
-                        foodSatchel[i] = "Toast";
-                        Console.Write("You cooked Toast");
-                        break;
-                    }
-                }
-            }
-            //Boiling Water
-            else if (ingredient1 == "drinkable water")
-            {
-                for (int i = 0; i < foodSatchel.Length; i++)
-                {
-                    if (foodSatchel[i] == "")
-                    {
-                        foodSatchel[i] = "Boiling Water";
-                        Console.WriteLine("You made Boiling Water");
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("You don't know what to make with this!");
-            }
-            Console.ReadLine();
-        }
-        static void tierTwo(string ingredient1, string ingredient2)
-        {
-
-            //Salad
-            if (ingredient1 == "lettuce" && ingredient2 == "lettuce") //Conditions (Must be in order)
-            {
-                for (int i = 0; i < foodSatchel.Length; i++)
-                {
-                    if (foodSatchel[i] == "") //First instance of ingredient
-                    {
-                        foodSatchel[i] = "Salad"; //Change it to result
-                    }
-                }
-            }
-            else if (ingredient1 == "toast" && ingredient2 == "jam")
-            {
-                for (int i = 0;i < foodSatchel.Length; i++)
-                {
-                    if (foodSatchel[i] == "")
-                    {
-                        foodSatchel[i] = "Jam Toast";
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("I don't know what to make with this!");
-            }
-            Console.ReadLine();
-        }
-
-        static void tierThree(string ingredient1, string ingredient2, string ingredient3)
-        {
-            if (ingredient1 == "bread" && ingredient2 == "lettuce" && ingredient3 == "bread")
-            {
-                for (int i = 0; i < foodSatchel.Length; i++)
-                { //Adds sandwich
-                    if (foodSatchel[i] == "")
-                    {
-                        foodSatchel[i] = "Basic Sandwich";
-                        Console.WriteLine("You made a Basic Sandwich");
-                        break;
-                    }
-                }
-            }
-            if (ingredient1 == "meat" && ingredient2 == "bread" && ingredient3 == "potato")
-            {
-                for (int i = 0; i < foodSatchel.Length; i++)
-                { //Adds Russian Steak
-                    if (foodSatchel[i] == "")
-                    {
-                        foodSatchel[i] = "Russian Steak";
-                        Console.WriteLine("You made a Russian Steak");
-                        break;
-                    }
-                }
-            }
-            else if (ingredient1 == "meat" && ingredient2 == "onion" && ingredient3 == "potato")
-            {
-                for (int i = 0; i < foodSatchel.Length; i++)
-                { //Adds borscht
-                    if (foodSatchel[i] == "Meat")
-                    {
-                        foodSatchel[i] = "Borscht";
-                        Console.WriteLine("You made Borscht");
-                        break;
-                    }
-                }
-            }
-            else if (ingredient1 == "cheese" && ingredient2 == "potato" && ingredient3 == "eggs")
-            {
-                for (int i = 0; i < foodSatchel.Length; i++)
-                { //Adds Varenniki
-                    if (foodSatchel[i] == "Cheese")
-                    {
-                        foodSatchel[i] = "Varenniki";
-                        Console.WriteLine("You made Varenniki");
-                        break;
-                    }
-                }
-            }
-            else if (ingredient1 == "meat" && ingredient2 == "sour cream" && ingredient3 == "onions")
-            {
-                for (int i = 0; i < foodSatchel.Length; i++)
-                { //Adds Beef Stroganoff
-                    if (foodSatchel[i] == "")
-                    {
-                        foodSatchel[i] = "Beef Stroganoff";
-                        Console.WriteLine("You made Beef Stroganoff");
-                        break;
-                    }
-                }
-            }
-            else if (ingredient1 == "pickle" && ingredient2 == "lemon" && ingredient3 == "flour")
-            {
-                for (int i = 0; i < foodSatchel.Length; i++)
-                { //Adds solyanka
-                    if (foodSatchel[i] == "")
-                    {
-                        foodSatchel[i] = "Solyanka";
-                        Console.WriteLine("You made Solyanka");
-                        break;
-                    }
-                }
-            }
-            else if (ingredient1 == "rice" && ingredient2 == "canned fruits" && ingredient3 == "flower seeds")
-            {
-                for (int i = 0; i < foodSatchel.Length; i++)
-                { //Adds Kutia
-                    if (foodSatchel[i] == "")
-                    {
-                        foodSatchel[i] = "Kutia";
-                        Console.WriteLine("You made Kutia");
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("I don't know what to make with this!");
-            }
-                Console.ReadLine();
         }
 
         static void Main()
