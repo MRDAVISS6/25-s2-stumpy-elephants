@@ -230,20 +230,20 @@ namespace UberProject
             Console.WriteLine("\nAfter this dream, he decided to go on a worldwide journey to work towards restoring human civilisation, one meal at a time.");
             Console.WriteLine("\nTo decide where to go first, he threw a dart at a small globe, landing on Russia...");
             Console.WriteLine("Press any key to continue...");
-            Console.Beep(440, 200);
-            Console.Beep(493, 200);
-            Console.Beep(440, 200);
-            Console.Beep(440, 200);
-            Console.Beep(440, 200);
-            Console.Beep(329, 200);
-            Console.Beep(293, 200);
-            Console.Beep(369, 200);
-            Console.Beep(369, 200);
-            Console.Beep(369, 200);
-            Console.Beep(329, 200);
-            Console.Beep(329, 200);
-            Console.Beep(369, 200);
-            Console.Beep(329, 200);
+            //Console.Beep(440, 200);
+            //Console.Beep(493, 200);
+            //Console.Beep(440, 200);
+            //Console.Beep(440, 200);
+            //Console.Beep(440, 200);
+            //Console.Beep(329, 200);
+            //Console.Beep(293, 200);
+            //Console.Beep(369, 200);
+            //Console.Beep(369, 200);
+            //Console.Beep(369, 200);
+            //Console.Beep(329, 200);
+            //Console.Beep(329, 200);
+            //Console.Beep(369, 200);
+            //Console.Beep(329, 200);
 
             Console.ReadLine();
             //start of the game
@@ -288,13 +288,13 @@ namespace UberProject
             Console.WriteLine("Prepare yourself!\n\n");
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(213, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(213, 100);
 
             Enemies enemy = monsters[15];
 
