@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UberProject
+namespace FlavoursOfFallout
 {
     internal class ArenaMode
     {
@@ -21,7 +21,7 @@ namespace UberProject
 
             Console.WriteLine("Enter the name of your character.");
             string charName = Console.ReadLine();
-            Player player = new Player(charName, 100, "Steel Pan", 6);
+            Player player = new Player(charName, 1, "Steel Pan", 6);
 
             Console.ResetColor();
 
