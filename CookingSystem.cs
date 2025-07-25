@@ -11,11 +11,11 @@ namespace CookingSystem
             public string[] ingredients = new string[2];
         }
 
-        static string[] foodSatchel = Program.foodSatchel;
+        static List<string> foodSatchel = Program.foodSatchel;
         static string cookbook = Program.cookbook;
         static void GiveItem(string item)
         {
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == "")
                 {
@@ -26,7 +26,7 @@ namespace CookingSystem
         }
         static void RemoveItem(string item)
         {
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 if (foodSatchel[i] == item)
                 {
@@ -41,7 +41,7 @@ namespace CookingSystem
             Console.WriteLine("Food Ingredients:");
             Console.WriteLine("Slot | Item");
             Console.WriteLine("---------------");
-            for (int i = 0; i < foodSatchel.Length; i++)
+            for (int i = 0; i < foodSatchel.Count; i++)
             {
                 string item = string.IsNullOrEmpty(foodSatchel[i]) ? "[Empty]" : foodSatchel[i];
                 Console.WriteLine($"{i + 1,4} | {item}");
@@ -95,7 +95,7 @@ namespace CookingSystem
             Console.Clear();
         }
 
-        static void ingredientsInput(ref string[] ingredientsArr) //TODO: Make it so you cannot enter in the same slot multiple times
+        static void ingredientsInput(ref string[] ingredientsArr) //You can enter in the same slot multiple times. Not too much of an issue because no recipe now use more than 2 ingredients
         {
             Console.Clear();
             int input;
@@ -119,7 +119,7 @@ namespace CookingSystem
                 {
                     ingredientsArr[i] = "";
                 }
-                else if (input > foodSatchel.Length || input < 0)
+                else if (input > foodSatchel.Count || input < 0)
                 {
                     Program.InvalidInput();
                 }
