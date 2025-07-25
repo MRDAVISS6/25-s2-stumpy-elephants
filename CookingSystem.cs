@@ -102,7 +102,7 @@ namespace CookingSystem
             bool validInput;
             Console.WriteLine($"Cookbook:\n{cookbook}");
             DisplayFoodSatchel();
-            Console.WriteLine("NOTE: Input 0 for a blank input. Input all 0's twice to exit without making anything (You will have to do another round of ingredient entry for it to take effect. I'm working on it)");
+            Console.WriteLine("NOTE: Input 0 for a blank input. Input all 0's twice to exit without making anything");
             for (int i = 0; i < 3; i++)
             {
                 Console.WriteLine($"Enter the slot number of ingredient {i+1}:");
