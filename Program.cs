@@ -1,5 +1,4 @@
-﻿using CookingSystem;
-using System.Diagnostics.Metrics;
+﻿using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Numerics;
 using System.Runtime.Intrinsics.X86;
@@ -326,7 +325,7 @@ namespace FlavoursOfFallout
 
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            CookingSys.InventoryManage();
+            CookingSystem.InventoryManage();
 
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
@@ -381,7 +380,7 @@ namespace FlavoursOfFallout
             }
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            CookingSys.InventoryManage();
+            CookingSystem.InventoryManage();
 
 
             Console.WriteLine("Press any button to continue...");
@@ -477,7 +476,7 @@ namespace FlavoursOfFallout
             Console.WriteLine("Kutia was added to your cookbook");
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            CookingSys.InventoryManage();
+            CookingSystem.InventoryManage();
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
             
@@ -551,7 +550,7 @@ namespace FlavoursOfFallout
             Console.WriteLine("Press any key to continue...");
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            CookingSys.InventoryManage();
+            CookingSystem.InventoryManage();
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
 

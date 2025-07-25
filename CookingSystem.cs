@@ -1,8 +1,6 @@
-﻿using FlavoursOfFallout;
-
-namespace CookingSystem
+﻿namespace FlavoursOfFallout
 {
-    public class CookingSys
+    public class CookingSystem
     {
 
         public struct Recipes()
