@@ -50,8 +50,8 @@ namespace FlavoursOfFallout
         public static Enemy RandomArenaEnemy(int i)
         {
             int modifier = i * 2;
-            Enemy[] monsters =
-            {
+            List<Enemy> monsters =
+            [
                 new Enemy("Mirelurk", 4*modifier, 7, "A mutated crab-like creature with a hard shell and a vicious bite."),
                 new Enemy("Super Mutant",3*modifier , 8, "A hulking brute with enhanced strength and resilience, often armed with heavy weapons."),
                 new Enemy("Deathclaw", 5*modifier, 10, "A terrifying predator with razor-sharp claws and incredible speed."),
@@ -67,9 +67,9 @@ namespace FlavoursOfFallout
                 new Enemy("Bone Dragger", 3*modifier, 5, "Lurks in the shadows, dragging scavenged bones across the ground to lure victims."),
                 new Enemy("Nuke Leech", 2*modifier, 5, "A glowing, slug-like parasite that feeds on radiation and attaches to living hosts."),
                 new Enemy("Murderous Crow", 2*modifier, 4, "A seemingly normal crow with teeth that can cut through ceramic plates")
-            };
+            ];
             Random rand = new Random();
-            int enemyNumber = rand.Next(monsters.Length);
+            int enemyNumber = rand.Next(monsters.Count);
 
             return monsters[enemyNumber];
         }
