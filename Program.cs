@@ -76,7 +76,7 @@ namespace FlavoursOfFallout
         private static int Task;
         public static string charName, cookbook = "";
         public static List<string> inventory = ["", "", "", "", "", "", "", "", "", ""]; 
-        public static List<string> foodSatchel = ["", "", "", "", "", "", "", "", "", ""];
+        public static List<string> foodSatchel = new List<string>();
 
         static void Welcome()
         {

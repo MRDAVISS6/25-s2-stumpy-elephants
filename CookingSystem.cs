@@ -11,27 +11,13 @@
 
         static List<string> foodSatchel = Program.foodSatchel;
         static string cookbook = Program.cookbook;
-        static void GiveItem(string item)
+        public static void GiveItem(string item)
         {
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = item;
-                    break;
-                }
-            }
+            foodSatchel.Add(item);
         }
-        static void RemoveItem(string item)
+        public static void RemoveItem(string item)
         {
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == item)
-                {
-                    foodSatchel[i] = "";
-                    break;
-                }
-            }
+            foodSatchel.Remove(item);
         }
 
         static void DisplayFoodSatchel()
