@@ -70,13 +70,13 @@ namespace FlavoursOfFallout
         }
     }
 
-    internal class Program
+    public class Program
     {
         private static Random random = new Random();
         private static int Task;
         public static string charName, cookbook = "";
-        static List<string> inventory = ["", "", "", "", "", "", "", "", "", ""]; 
-        static List<string> foodSatchel = ["", "", "", "", "", "", "", "", "", ""];
+        public static List<string> inventory = ["", "", "", "", "", "", "", "", "", ""]; 
+        public static List<string> foodSatchel = ["", "", "", "", "", "", "", "", "", ""];
 
         static void Welcome()
         {
@@ -1236,7 +1236,7 @@ namespace FlavoursOfFallout
             Console.ReadLine();
         }
 
-        static void InvalidInput()
+        public static void InvalidInput()
         {
             Console.WriteLine("Invalid Input");
             Console.ReadLine();
