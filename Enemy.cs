@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UberProject
+namespace FlavoursOfFallout
 {
     public struct Enemy
     {
@@ -28,8 +28,8 @@ namespace UberProject
 
         // Static methods/variables used for monster creation
 
-        public static Enemy[] storyModeMonsters =
-        {
+        public static List<Enemy> storyModeMonsters =
+            [
             new Enemy("Mirelurk", 30, 5, "A mutated crab-like creature with a hard shell and a vicious bite."),
             new Enemy("Super Mutant", 40, 8, "A hulking brute with enhanced strength and resilience, often armed with heavy weapons."),
             new Enemy("Deathclaw", 50, 10, "A terrifying predator with razor-sharp claws and incredible speed."),
@@ -46,7 +46,7 @@ namespace UberProject
             new Enemy("Nuke Leech", 18, 3, "A glowing, slug-like parasite that feeds on radiation and attaches to living hosts."),
             new Enemy("Murderous Crow", 22, 4, "A seemingly normal crow with teeth that can cut through ceramic plates"),
             new Enemy("Mutant Bear", 35, 8, "A mutated bear, aggressive and dangerous.")
-        };
+            ];
         public static Enemy RandomArenaEnemy(int i)
         {
             int modifier = i * 2;
