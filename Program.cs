@@ -325,7 +325,7 @@ namespace FlavoursOfFallout
 
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            CookingSystem.InventoryManage();
+            CookingSystem.SatchelManage();
 
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
@@ -380,7 +380,7 @@ namespace FlavoursOfFallout
             }
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            CookingSystem.InventoryManage();
+            CookingSystem.SatchelManage();
 
 
             Console.WriteLine("Press any button to continue...");
@@ -476,7 +476,7 @@ namespace FlavoursOfFallout
             Console.WriteLine("Kutia was added to your cookbook");
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            CookingSystem.InventoryManage();
+            CookingSystem.SatchelManage();
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
             
@@ -550,7 +550,7 @@ namespace FlavoursOfFallout
             Console.WriteLine("Press any key to continue...");
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
-            CookingSystem.InventoryManage();
+            CookingSystem.SatchelManage();
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
 

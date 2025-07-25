@@ -32,7 +32,7 @@
             }
         }
 
-        public static void InventoryManage()
+        public static void SatchelManage()
         {
             string temp;
             int input = 2;
