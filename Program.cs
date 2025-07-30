@@ -290,32 +290,9 @@ namespace FlavoursOfFallout
             Thread.Sleep(500);
             cookbook = cookbook + "[Russian Steak | Meat -> Bread -> Potato] ";
             foodSatchel.Add("Bread");
-
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Meat";
-                    break;
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Potato";
-                    break;
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Butter";
-                    break;
-                }
-            }
-
+            foodSatchel.Add("Meat");
+            foodSatchel.Add("Potato");
+            foodSatchel.Add("Butter");
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
             CookingSystem.SatchelManage();
@@ -339,38 +316,10 @@ namespace FlavoursOfFallout
             Console.WriteLine("2. Solyanka | Pickle -> Lemon -> Flour");
             cookbook = cookbook + "[Borcht | Meat -> Onion -> Potato] ";
             cookbook = cookbook + "[Solyanka | Pickle -> Lemon -> Flour] ";
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Onion";
-                    break;
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Pickle";
-                    break;
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Lemon";
-                    break;
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Flour";
-                    break;
-                }
-            }
+            foodSatchel.Add("Onion");
+            foodSatchel.Add("Pickle");
+            foodSatchel.Add("Lemon");
+            foodSatchel.Add("Flour");
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
             CookingSystem.SatchelManage();
@@ -384,7 +333,7 @@ namespace FlavoursOfFallout
 
         static void event4(ref Player player)
         {
-            string input;
+            string input, temp;
             Console.Clear();
             Console.WriteLine("Back outside roaming the wasteland you come across what used to be an old car park. " +
                 "\nTattered green tents lay across it, and military jeeps create barricades." +
@@ -425,7 +374,8 @@ namespace FlavoursOfFallout
                     {
                         if (foodSatchel[i] == "Meat" ||  foodSatchel[i] == "Fish")
                         {
-                            foodSatchel[i] = "";
+                            temp = foodSatchel[i];
+                            foodSatchel.Remove(temp);
                         }
                     }
                     Console.WriteLine("You run away, losing all your meat");
