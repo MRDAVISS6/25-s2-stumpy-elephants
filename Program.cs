@@ -5,6 +5,7 @@ using System.Runtime.Intrinsics.X86;
 using System.Text.RegularExpressions;
 using System.Threading.Channels;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FlavoursOfFallout
 {
@@ -981,10 +982,21 @@ namespace FlavoursOfFallout
                             new Enemy("Nuke Leech", 18, 3, "A glowing, slug-like parasite that feeds on radiation and attaches to living hosts.")
                         ];
                         Console.WriteLine("Monsters in the game:\n");
+                        Console.WriteLine("┌────────────────────────┬────────────────┬────────────────┬────────────────────────────────────────────────────────────────────────────────────────────┐");
+                        Console.Write("│Enemy Name".PadRight(24) + " ");
+                        Console.Write("│Enemy Health".PadRight(16) + " ");
+                        Console.Write("│Enemy Damage".PadRight(16) + " ");
+                        Console.WriteLine("│Description".PadRight(92) + " │");
+                        Console.WriteLine("├────────────────────────┼────────────────┼────────────────┼────────────────────────────────────────────────────────────────────────────────────────────┤");
+
                         foreach (var enemy in monsters)
                         {
-                            Console.WriteLine(enemy.enemyName);
+                            Console.Write("│" + enemy.enemyName.PadRight(24));
+                            Console.Write("│" + enemy.enemyHP.ToString().PadRight(16));
+                            Console.Write("│" + enemy.enemyAttack.ToString().PadRight(16));
+                            Console.WriteLine("│" + enemy.enemyDesc.PadRight(92) + "│");
                         }
+                        Console.WriteLine("└────────────────────────┴────────────────┴────────────────┴────────────────────────────────────────────────────────────────────────────────────────────┘");
                         Console.WriteLine("\n-- Press any key to return to the collection menu --");
                         Console.ReadLine();
                         break;
