@@ -289,40 +289,10 @@ namespace FlavoursOfFallout
             Console.WriteLine("Recipe for Russian Steak | Meat -> Bread -> Potato.");
             Thread.Sleep(500);
             cookbook = cookbook + "[Russian Steak | Meat -> Bread -> Potato] ";
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Bread";
-                    break;
-                }
-            }
-
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Meat";
-                    break;
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Potato";
-                    break;
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Butter";
-                    break;
-                }
-            }
-
+            foodSatchel.Add("Bread");
+            foodSatchel.Add("Meat");
+            foodSatchel.Add("Potato");
+            foodSatchel.Add("Butter");
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
             CookingSystem.SatchelManage();
@@ -346,38 +316,12 @@ namespace FlavoursOfFallout
             Console.WriteLine("2. Solyanka | Pickle -> Lemon -> Flour");
             cookbook = cookbook + "[Borcht | Meat -> Onion -> Potato] ";
             cookbook = cookbook + "[Solyanka | Pickle -> Lemon -> Flour] ";
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Onion";
-                    break;
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Pickle";
-                    break;
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Lemon";
-                    break;
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Flour";
-                    break;
-                }
-            }
+            foodSatchel.Add("Meat");
+            foodSatchel.Add("Potato");
+            foodSatchel.Add("Onion");
+            foodSatchel.Add("Pickle");
+            foodSatchel.Add("Lemon");
+            foodSatchel.Add("Flour");
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
             CookingSystem.SatchelManage();
@@ -391,7 +335,7 @@ namespace FlavoursOfFallout
 
         static void event4(ref Player player)
         {
-            string input;
+            string input, temp;
             Console.Clear();
             Console.WriteLine("Back outside roaming the wasteland you come across what used to be an old car park. " +
                 "\nTattered green tents lay across it, and military jeeps create barricades." +
@@ -432,7 +376,8 @@ namespace FlavoursOfFallout
                     {
                         if (foodSatchel[i] == "Meat" ||  foodSatchel[i] == "Fish")
                         {
-                            foodSatchel[i] = "";
+                            temp = foodSatchel[i];
+                            foodSatchel.Remove(temp);
                         }
                     }
                     Console.WriteLine("You run away, losing all your meat");
@@ -452,27 +397,9 @@ namespace FlavoursOfFallout
             Console.WriteLine("They taught {charName} the recipe of Kutia | Rice -> Canned Fruits -> Flower Seeds");
             Console.ReadLine();
             cookbook = cookbook + "[Kutia | Rice -> Canned Fruits -> Flower Seeds] ";
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Rice";
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Canned Fruits";
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Flower Seeds";
-                }
-            }
+            foodSatchel.Add("Rice");
+            foodSatchel.Add("Canned Fruits");
+            foodSatchel.Add("Flower Seeds");
             Console.WriteLine("Kutia was added to your cookbook");
             Console.WriteLine("Press any button to cook new dish");
             Console.ReadLine();
@@ -518,34 +445,12 @@ namespace FlavoursOfFallout
             Console.WriteLine("Now these recipies are added in your inventory");
             cookbook = cookbook + "[Varenniki | Cheese -> Potato -> Eggs] ";
             cookbook = cookbook + "[Beef stroganoff | Meat -> Sour Cream -> Onions] ";
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Cheese";
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Eggs";
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Sour Cream";
-                }
-            }
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Onions";
-                }
-            }
+            foodSatchel.Add("Meat");
+            foodSatchel.Add("Potato");
+            foodSatchel.Add("Cheese");
+            foodSatchel.Add("Eggs");
+            foodSatchel.Add("Sour Cream");
+            foodSatchel.Add("Onions");
 
             Console.WriteLine("Press any key to continue...");
             Console.WriteLine("Press any button to cook new dish");
@@ -868,15 +773,7 @@ namespace FlavoursOfFallout
             Items acquiredItem2 = items[itemLoot2];
             Ingredients acquiredIngredient = ingredients[ingredientLoot];
 
-            for (int i = 0; i < inventory.Count; i++)
-            {
-                if (inventory[i] == "")
-                {
-                    inventory[i] = $"{acquiredEpicWeapon.weaponName} - {acquiredEpicWeapon.weaponDamage} - {acquiredEpicWeapon.weaponType} - {acquiredEpicWeapon.weaponRarity}";
-                    break;
-                }
-
-            }
+            inventory.Add($"{acquiredEpicWeapon.weaponName} - {acquiredEpicWeapon.weaponDamage} - {acquiredEpicWeapon.weaponType} - {acquiredEpicWeapon.weaponRarity}");
 
             Console.WriteLine("You have received ");
 
@@ -905,27 +802,13 @@ namespace FlavoursOfFallout
             Console.WriteLine($"You have received {acquiredItem1.itemName}");
             Thread.Sleep(1000);
 
-            for (int i = 0; i < inventory.Count; i++)
-            {
-                if (inventory[i] == "")
-                {
-                    inventory[i] = $"{acquiredItem1.itemName} - {acquiredItem1.itemType} - {acquiredItem1.itemEffectValue}";
-                    break;
-                }
-            }
+            inventory.Add($"{acquiredItem1.itemName} - {acquiredItem1.itemType} - {acquiredItem1.itemEffectValue}");
 
             Console.WriteLine($"You have received {acquiredItem2.itemName}");
             Thread.Sleep(1000);
             Console.WriteLine();
 
-            for (int i = 0; i < inventory.Count; i++)
-            {
-                if (inventory[i] == "")
-                {
-                    inventory[i] = $"{acquiredItem2.itemName} - {acquiredItem2.itemType} - {acquiredItem2.itemEffectValue}";
-                    break;
-                }
-            }
+            inventory.Add($"{acquiredItem2.itemName} - {acquiredItem2.itemType} - {acquiredItem2.itemEffectValue}");
 
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
