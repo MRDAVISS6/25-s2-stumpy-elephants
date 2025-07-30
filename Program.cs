@@ -316,6 +316,8 @@ namespace FlavoursOfFallout
             Console.WriteLine("2. Solyanka | Pickle -> Lemon -> Flour");
             cookbook = cookbook + "[Borcht | Meat -> Onion -> Potato] ";
             cookbook = cookbook + "[Solyanka | Pickle -> Lemon -> Flour] ";
+            foodSatchel.Add("Meat");
+            foodSatchel.Add("Potato");
             foodSatchel.Add("Onion");
             foodSatchel.Add("Pickle");
             foodSatchel.Add("Lemon");
@@ -443,6 +445,8 @@ namespace FlavoursOfFallout
             Console.WriteLine("Now these recipies are added in your inventory");
             cookbook = cookbook + "[Varenniki | Cheese -> Potato -> Eggs] ";
             cookbook = cookbook + "[Beef stroganoff | Meat -> Sour Cream -> Onions] ";
+            foodSatchel.Add("Meat");
+            foodSatchel.Add("Potato");
             foodSatchel.Add("Cheese");
             foodSatchel.Add("Eggs");
             foodSatchel.Add("Sour Cream");
