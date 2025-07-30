@@ -1032,35 +1032,67 @@ namespace FlavoursOfFallout
 
                         Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Tier 1 Weapons:");
+                        Console.WriteLine("┌────────────────────────┬────────────────┬────────────────┐");
+                        Console.Write("│Weapon Name".PadRight(24) + " ");
+                        Console.Write("│Weapon Type".PadRight(16) + " ");
+                        Console.WriteLine("│Weapon Damage".PadRight(16) + " │");
+                        Console.WriteLine("├────────────────────────┼────────────────┼────────────────┤");
                         foreach (var weapon in tier1weapons)
                         {
-                            Console.WriteLine($"Name: {weapon.weaponName}, Damage: {weapon.weaponDamage}, Type: {weapon.weaponType}");
+                            Console.Write("│" + weapon.weaponName.PadRight(24));
+                            Console.Write("│" + weapon.weaponType.PadRight(16));
+                            Console.WriteLine("│" + weapon.weaponDamage.ToString().PadRight(16) + "│");
+
                         }
+                        Console.WriteLine("└────────────────────────┴────────────────┴────────────────┘");
                         Console.WriteLine();
 
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Tier 2 Weapons:");
+                        Console.WriteLine("┌────────────────────────┬────────────────┬────────────────┐");
+                        Console.Write("│Weapon Name".PadRight(24) + " ");
+                        Console.Write("│Weapon Type".PadRight(16) + " ");
+                        Console.WriteLine("│Weapon Damage".PadRight(16) + " │");
+                        Console.WriteLine("├────────────────────────┼────────────────┼────────────────┤");
                         foreach (var weapon in tier2weapons)
                         {
-                            Console.WriteLine($"Name: {weapon.weaponName}, Damage: {weapon.weaponDamage}, Type: {weapon.weaponType}");
+                            Console.Write("│" + weapon.weaponName.PadRight(24));
+                            Console.Write("│" + weapon.weaponType.PadRight(16));
+                            Console.WriteLine("│" + weapon.weaponDamage.ToString().PadRight(16) + "│");
                         }
+                        Console.WriteLine("└────────────────────────┴────────────────┴────────────────┘");
                         Console.WriteLine();
 
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("Tier 3 Weapons:");
+                        Console.WriteLine("┌────────────────────────┬────────────────┬────────────────┐");
+                        Console.Write("│Weapon Name".PadRight(24) + " ");
+                        Console.Write("│Weapon Type".PadRight(16) + " ");
+                        Console.WriteLine("│Weapon Damage".PadRight(16) + " │");
+                        Console.WriteLine("├────────────────────────┼────────────────┼────────────────┤");
                         foreach (var weapon in tier3weapons)
                         {
-                            Console.WriteLine($"Name: {weapon.weaponName}, Damage: {weapon.weaponDamage}, Type: {weapon.weaponType}");
+                            Console.Write("│" + weapon.weaponName.PadRight(24));
+                            Console.Write("│" + weapon.weaponType.PadRight(16));
+                            Console.WriteLine("│" + weapon.weaponDamage.ToString().PadRight(16) + "│");
                         }
+                        Console.WriteLine("└────────────────────────┴────────────────┴────────────────┘");
                         Console.WriteLine();
 
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("Tier 4 Weapons:");
+                        Console.WriteLine("┌────────────────────────┬────────────────┬────────────────┐");
+                        Console.Write("│Weapon Name".PadRight(24) + " ");
+                        Console.Write("│Weapon Type".PadRight(16) + " ");
+                        Console.WriteLine("│Weapon Damage".PadRight(16) + " │");
+                        Console.WriteLine("├────────────────────────┼────────────────┼────────────────┤");
                         foreach (var weapon in tier4weapons)
                         {
-                            Console.WriteLine($"Name: {weapon.weaponName}, Damage: {weapon.weaponDamage}, Type: {weapon.weaponType}");
+                            Console.Write("│" + weapon.weaponName.PadRight(24));
+                            Console.Write("│" + weapon.weaponType.PadRight(16));
+                            Console.WriteLine("│" + weapon.weaponDamage.ToString().PadRight(16) + "│");
                         }
-
+                        Console.WriteLine("└────────────────────────┴────────────────┴────────────────┘");
                         Console.ResetColor();
 
                         Console.WriteLine("\n-- Press any key to return to the collection menu --");
