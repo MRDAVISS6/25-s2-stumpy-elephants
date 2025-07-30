@@ -25,6 +25,9 @@ namespace FlavoursOfFallout
         {
             return $"Name: {playerName} | HP: {playerHP} | Weapon: {playerWeapon} | Attack: {playerAttack}";
         }
+
+        public bool IsAlive => this.playerHP > 0;
+                
     }
     
     public struct Weapons()
@@ -223,19 +226,6 @@ namespace FlavoursOfFallout
 
 
             event1(ref player);
-
-            event2(ref player);
-
-            event3(ref player);
-
-            event4(ref player);
-
-            event5(ref player);
-
-            endEvent(ref player);
-
-
-
         }
 
     
@@ -261,6 +251,7 @@ namespace FlavoursOfFallout
             Enemy enemy = Enemy.storyModeMonsters[15];
 
             CombatSystem(ref player, enemy);
+            if (!player.IsAlive) return;
 
             Console.WriteLine("YOU'VE FOUND EPIC LOOT!");
             Thread.Sleep(1000);
@@ -278,6 +269,8 @@ namespace FlavoursOfFallout
             Thread.Sleep(500);
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
+
+            event2(ref player);
         }
 
         static void event2(ref Player player)
@@ -330,6 +323,8 @@ namespace FlavoursOfFallout
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
             //end of event and he continues his journey
+
+            event3(ref player);
         }
 
         static void event3(ref Player player)
@@ -386,7 +381,7 @@ namespace FlavoursOfFallout
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
 
-
+            event4(ref player);
         }
 
         static void event4(ref Player player)
@@ -399,15 +394,16 @@ namespace FlavoursOfFallout
                 "\nAll of a sudden a crow comes eye to eye with you, twitchingly eyeing you up.");
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(213, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(213, 100);
             Enemy enemy = Enemy.storyModeMonsters[14];
             CombatSystem(ref player, enemy); //Crow fight
+            if (!player.IsAlive) return;
             Console.Clear();
             Console.WriteLine("You notice that the crow has given you bite marks. It seems that over time it has evolved teeth to chew through the armour plating that the military soldiers have." +
                 "\nIt seems that you have caused quite the commotion during your fight, and now all of the crows want to see what's going on");
@@ -418,11 +414,14 @@ namespace FlavoursOfFallout
             switch (input)
             {
                 case "f":
-                    CombatSystem(ref player, enemy); //Fight 5 crows
-                    CombatSystem(ref player, enemy); 
-                    CombatSystem(ref player, enemy); 
-                    CombatSystem(ref player, enemy); 
-                    CombatSystem(ref player, enemy);
+                    string baseName = enemy.enemyName;
+                    for (int i = 0; i < 5; i++)
+                    {
+                        enemy.enemyName = baseName + $" #{i+1}"; // give each crow a number
+                        CombatSystem(ref player, enemy); //Fight 5 crows
+                        if (!player.IsAlive) return;
+                    }
+                    
                     Console.WriteLine("YOU'VE FOUND EPIC LOOT!");
                     Thread.Sleep(1000);
                     AcquireEpicLoot();
@@ -439,6 +438,8 @@ namespace FlavoursOfFallout
                     break;
             }
             Console.ReadLine();
+
+            event5(ref player);
         }
 
         static void event5(ref Player player)
@@ -449,7 +450,7 @@ namespace FlavoursOfFallout
             Console.WriteLine($"Coming down to meet the survivors, they instantly welcome {charName} into their community." +
                 $"\n{charName} explained their dream of helping people, and the survivors told them that they believed that" +
                 $"\none day a messiah would come to save us all, and that {charName} should eat a meal with them");
-            Console.WriteLine("They taught {charName} the recipe of Kutia | Rice -> Canned Fruits -> Flower Seeds");
+            Console.WriteLine($"They taught {charName} the recipe of Kutia | Rice -> Canned Fruits -> Flower Seeds");
             Console.ReadLine();
             cookbook = cookbook + "[Kutia | Rice -> Canned Fruits -> Flower Seeds] ";
             for (int i = 0; i < foodSatchel.Count; i++)
@@ -479,7 +480,8 @@ namespace FlavoursOfFallout
             CookingSystem.SatchelManage();
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
-            
+
+            endEvent(ref player);
         }
 
         static void endEvent(ref Player player)
@@ -506,6 +508,7 @@ namespace FlavoursOfFallout
             Enemy enemy = Enemy.storyModeMonsters[3];
 
             CombatSystem(ref player, enemy);
+            if (!player.IsAlive) return;
 
             //fighting scene will come here
             Console.Clear();
@@ -628,18 +631,6 @@ namespace FlavoursOfFallout
                         Console.WriteLine($"{enemy.enemyName} attacks {player.playerName} for {eAttack} damage!");
                         //Console.Beep(200, 150);
                         Console.ResetColor();
-                        Thread.Sleep(700);
-
-                        if (player.playerHP <= 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"{player.playerName} has been defeated!");
-                            Console.ResetColor();
-
-                            Console.WriteLine("GAME OVER! Press Enter to exit...");
-                            Main();
-                        }
-
                         break;
 
                     case 2:
@@ -651,9 +642,16 @@ namespace FlavoursOfFallout
                         continue;
                 }
 
+                if (player.playerHP <= 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{player.playerName} has been defeated!");
+                    Console.ResetColor();
+                    break;
+                }
             }
-
-            Console.WriteLine("Combat ended. Press Enter to continue...");
+            if (!player.IsAlive) Console.WriteLine("GAME OVER! Press Enter to exit...");
+            else Console.WriteLine("Combat ended. Press Enter to continue...");
             Console.ReadLine();
 
         }
