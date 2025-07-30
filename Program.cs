@@ -43,7 +43,7 @@ namespace FlavoursOfFallout
         public string ingredientName;
         public override string ToString()
         {
-            return $"Name: {ingredientName}";
+            return $"{ingredientName}";
         }
     }
     public struct Items()
@@ -1117,10 +1117,14 @@ namespace FlavoursOfFallout
                             new Ingredients { ingredientName = "Mutfruit" }
                         ];
                         Console.WriteLine("Ingredients in the game:\n");
+                        Console.WriteLine("┌─────────────────────┐");
+                        Console.WriteLine("│Ingredient Name      │");
+                        Console.WriteLine("├─────────────────────┤");
                         foreach (var ingredient in ingredients)
                         {
-                            Console.WriteLine(ingredient);
+                            Console.WriteLine($"│{ingredient}".PadRight(22) + "│");
                         }
+                        Console.WriteLine("└─────────────────────┘");
                         Console.WriteLine("\n-- Press any key to return to the collection menu --");
                         Console.ReadLine();
                         break;
