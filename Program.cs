@@ -289,14 +289,7 @@ namespace FlavoursOfFallout
             Console.WriteLine("Recipe for Russian Steak | Meat -> Bread -> Potato.");
             Thread.Sleep(500);
             cookbook = cookbook + "[Russian Steak | Meat -> Bread -> Potato] ";
-            for (int i = 0; i < foodSatchel.Count; i++)
-            {
-                if (foodSatchel[i] == "")
-                {
-                    foodSatchel[i] = "Bread";
-                    break;
-                }
-            }
+            foodSatchel.Add("Bread");
 
             for (int i = 0; i < foodSatchel.Count; i++)
             {
