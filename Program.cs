@@ -61,12 +61,11 @@ namespace FlavoursOfFallout
     public struct Recipes()
     {
         public string recipeName;
-        public string ingredient1;
-        public string ingredient2;
-        public string ingredient3;
+        public string[] ingredients = new string[2];
+        
         public override string ToString()
         {
-            return $"{recipeName} | Ingredient1: {ingredient1} | Ingredient2: {ingredient2} | Ingredient3: {ingredient3}";
+            return $"{recipeName} | Ingredient1: {ingredients[0]} -> Ingredient2: {ingredients[1]} -> Ingredient3: {ingredients[2]}";
         }
     }
 
@@ -934,7 +933,7 @@ namespace FlavoursOfFallout
 
 
         
-        public static void Task3()
+        public static void Collections()
         {
             // Collection of Things
             string userInput;
@@ -1128,34 +1127,39 @@ namespace FlavoursOfFallout
 
                     case "5":
                         // Display all recipes in a readable format
-                        List<Recipes> recipes =
-                        [
-                            new Recipes { recipeName = "Russian Steak", ingredient1 = "Meat", ingredient2 = "Potato", ingredient3 = "Butter" },
-                            new Recipes { recipeName = "Nuka-Cola Cake", ingredient1 = "Flour", ingredient2 = "Sugar", ingredient3 = "Nuka-Cola" },
-                            new Recipes { recipeName = "Mutfruit Salad", ingredient1 = "Mutfruit", ingredient2 = "Lettuce", ingredient3 = "Tomato" },
-                            new Recipes { recipeName = "Radroach Stew", ingredient1 = "Radroach Meat", ingredient2 = "Potato", ingredient3 = "Carrot" },
-                            new Recipes { recipeName = "Wasteland Omelette", ingredient1 = "Egg", ingredient2 = "Cheese", ingredient3 = "Onion" },
-                            new Recipes { recipeName = "Mirelurk Pie", ingredient1 = "Mirelurk Meat", ingredient2 = "Potato", ingredient3 = "Salt" },
-                            new Recipes { recipeName = "Mutant Hound Jerky", ingredient1 = "Mutant Hound Meat", ingredient2 = "Salt", ingredient3 = "Pepper" },
-                            new Recipes { recipeName = "Ghoul Goulash", ingredient1 = "Ghoul Meat", ingredient2 = "Carrot", ingredient3 = "Onion" },
-                            new Recipes { recipeName = "Irradiated Apple Jam", ingredient1 = "Apple", ingredient2 = "Sugar", ingredient3 = "Jam" },
-                            new Recipes { recipeName = "Cheesy Potato Soup", ingredient1 = "Potato", ingredient2 = "Cheese", ingredient3 = "Drinkable Water" },
-                            new Recipes { recipeName = "Fried Fish Fillet", ingredient1 = "Fish", ingredient2 = "Butter", ingredient3 = "Salt" },
-                            new Recipes { recipeName = "Mushroom Stew", ingredient1 = "Mushroom", ingredient2 = "Onion", ingredient3 = "Drinkable Water" },
-                            new Recipes { recipeName = "Egg & Mutfruit Breakfast", ingredient1 = "Egg", ingredient2 = "Mutfruit", ingredient3 = "Milk" },
-                            new Recipes { recipeName = "Carrot & Potato Mash", ingredient1 = "Carrot", ingredient2 = "Potato", ingredient3 = "Butter" },
-                            new Recipes { recipeName = "Spicy Meat Skewer", ingredient1 = "Meat", ingredient2 = "Pepper", ingredient3 = "Onion" },
-                            new Recipes { recipeName = "Garlic Bread", ingredient1 = "Bread", ingredient2 = "Butter", ingredient3 = "Garlic" },
-                            new Recipes { recipeName = "Apple Pie", ingredient1 = "Apple", ingredient2 = "Flour", ingredient3 = "Butter" },
-                            new Recipes { recipeName = "Mutfruit Jam Toast", ingredient1 = "Toast", ingredient2 = "Mutfruit", ingredient3 = "Jam" },
-                            new Recipes { recipeName = "Rad-X Smoothie", ingredient1 = "Rad-X", ingredient2 = "Milk", ingredient3 = "Mutfruit" },
-                            new Recipes { recipeName = "Pepper Steak", ingredient1 = "Meat", ingredient2 = "Pepper", ingredient3 = "Butter" }
-                        ];
+                        
+                        Recipes[] recipes =
+                        {
+                            new Recipes { recipeName = "Toast", ingredients = new string[] { "Bread", "", "" } },
+                            new Recipes { recipeName = "Boiling Water", ingredients = new string[] { "Drinkable-Water", "", "" } },
+                            new Recipes { recipeName = "Jam Toast", ingredients = new string[] { "Toast", "Jam", "" } },
+                            new Recipes { recipeName = "Russian Steak", ingredients = new string[] { "Meat", "Bread", "Potato" } },
+                            new Recipes { recipeName = "Borscht", ingredients = new string[] { "Meat", "Onion", "Potato" } },
+                            new Recipes { recipeName = "Varennik", ingredients = new string[] { "Cheese", "Potato", "Eggs" } },
+                            new Recipes { recipeName = "Beef Stroganoff", ingredients = new string[] { "Meat", "Sour-Cream", "Onion" } },
+                            new Recipes { recipeName = "Solyanka", ingredients = new string[] { "Pickle", "Lemon", "Flour" } },
+                            new Recipes { recipeName = "Kutia", ingredients = new string[] { "Rice", "Canned-Fruit", "Flower-Seeds" } },
+                        }
+                        ;
+                        Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine("Recipes in the game:\n");
+
+                        Console.WriteLine("┌────────────────┬────────────────┬────────────────┬────────────────┐");
+
+                        Console.Write("│Recipe Name".PadRight(16) + " ");
+                        Console.Write("│Ingredient 1".PadRight(16) + " ");
+                        Console.Write("│Ingredient 2".PadRight(16) + " ");
+                        Console.WriteLine("│Ingredient 3".PadRight(16) + " │");
+                        Console.WriteLine("├────────────────┼────────────────┼────────────────┼────────────────┤");
+
                         foreach (var recipe in recipes)
                         {
-                            Console.WriteLine(recipe);
+                            Console.Write("│" + recipe.recipeName.PadRight(16));
+                            Console.Write("│" + recipe.ingredients[0].PadRight(16));
+                            Console.Write("│" + recipe.ingredients[1].PadRight(16));
+                            Console.WriteLine("│" + recipe.ingredients[2].PadRight(16) + "│");
                         }
+                        Console.WriteLine("└────────────────┴────────────────┴────────────────┴────────────────┘");
                         Console.WriteLine("\n-- Press any key to return to the collection menu --");
                         Console.ReadLine();
                         break;
@@ -1221,7 +1225,7 @@ namespace FlavoursOfFallout
                         break;
 
                     case 3:
-                        Task3();
+                        Collections();
                         break;
 
                     case 0:
