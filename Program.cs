@@ -983,7 +983,7 @@ namespace FlavoursOfFallout
                         Console.WriteLine("Monsters in the game:\n");
                         foreach (var enemy in monsters)
                         {
-                            Console.WriteLine(enemy);
+                            Console.WriteLine(enemy.enemyName);
                         }
                         Console.WriteLine("\n-- Press any key to return to the collection menu --");
                         Console.ReadLine();
@@ -1083,10 +1083,21 @@ namespace FlavoursOfFallout
                         ];
 
                         Console.WriteLine("Items in the game:\n");
+                        Console.WriteLine("┌─────────────────────┬────────────────┬────────────────┬───────────────────────────────────────────────────────────────┐");
+                        Console.Write("│Item Name".PadRight(21) + " ");
+                        Console.Write("│Item Type".PadRight(16) + " ");
+                        Console.Write("│Item Effect".PadRight(16) + " ");
+                        Console.WriteLine("│Description".PadRight(63) + " │");
+                        Console.WriteLine("├─────────────────────┼────────────────┼────────────────┼───────────────────────────────────────────────────────────────┤");
+
                         foreach (var item in items)
                         {
-                            Console.WriteLine(item);
+                            Console.Write("│" + item.itemName.PadRight(21));
+                            Console.Write("│" + item.itemType.PadRight(16));
+                            Console.Write("│" + item.itemEffectValue.ToString().PadRight(16));
+                            Console.WriteLine("│" + item.itemDesc.PadRight(63) + "│");
                         }
+                        Console.WriteLine("└─────────────────────┴────────────────┴────────────────┴───────────────────────────────────────────────────────────────┘");
                         Console.WriteLine("\n-- Press any key to return to the collection menu --");
                         Console.ReadLine();
                         break;
@@ -1149,7 +1160,6 @@ namespace FlavoursOfFallout
                         Console.WriteLine("Recipes in the game:\n");
 
                         Console.WriteLine("┌────────────────┬────────────────┬────────────────┬────────────────┐");
-
                         Console.Write("│Recipe Name".PadRight(16) + " ");
                         Console.Write("│Ingredient 1".PadRight(16) + " ");
                         Console.Write("│Ingredient 2".PadRight(16) + " ");
