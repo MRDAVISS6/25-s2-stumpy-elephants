@@ -343,13 +343,13 @@ namespace FlavoursOfFallout
                 "\nAll of a sudden a crow comes eye to eye with you, twitchingly eyeing you up.");
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(319, 100);
-            Console.Beep(213, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(319, 100);
+            //Console.Beep(213, 100);
             Enemy enemy = Enemy.storyModeMonsters[14];
             CombatSystem(ref player, enemy); //Crow fight
             Console.Clear();
