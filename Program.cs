@@ -78,14 +78,20 @@ namespace FlavoursOfFallout
         private static Random random = new Random();
         private static int Task;
         public static string charName, cookbook = "";
-        public static List<string> inventory = ["", "", "", "", "", "", "", "", "", ""]; 
+        public static List<string> inventory = new List<string>(); 
         public static List<string> foodSatchel = new List<string>();
 
         static void Welcome()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("______ _                                        __       ______    _ _             _   \r\n|  ___| |                                      / _|      |  ___|  | | |           | |  \r\n| |_  | | __ ___   _____  _ __ ___        ___ | |_       | |_ __ _| | | ___  _   _| |_ \r\n|  _| | |/ _` \\ \\ / / _ \\| '__/ __|      / _ \\|  _|      |  _/ _` | | |/ _ \\| | | | __|\r\n| |   | | (_| |\\ V / (_) | |  \\__ \\     | (_) | |        | || (_| | | | (_) | |_| | |_ \r\n\\_|   |_|\\__,_| \\_/ \\___/|_|  |___/      \\___/|_|        \\_| \\__,_|_|_|\\___/ \\__,_|\\__|\r\n                                                                                       \r\n                                                                                       ");
+            Console.WriteLine(@" ______ _                                          __   ______    _ _             _   
+|  ____| |                                        / _| |  ____|  | | |           | |  
+| |__  | | __ ___   _____  _   _ _ __ ___    ___ | |_  | |__ __ _| | | ___  _   _| |_ 
+|  __| | |/ _` \ \ / / _ \| | | | '__/ __|  / _ \|  _| |  __/ _` | | |/ _ \| | | | __|
+| |    | | (_| |\ V / (_) | |_| | |  \__ \ | (_) | |   | | | (_| | | | (_) | |_| | |_ 
+|_|    |_|\__,_| \_/ \___/ \__,_|_|  |___/  \___/|_|   |_|  \__,_|_|_|\___/ \__,_|\__|
+");
             Console.ResetColor();
             Console.WriteLine("The Menu options are:");
             Console.WriteLine("1  New Game");
@@ -564,14 +570,37 @@ namespace FlavoursOfFallout
 
         static void DisplayInventory(ref Player player, ref Enemy enemy)
         {
-            Console.WriteLine("Inventory:");
-            Console.WriteLine("Slot | Item");
-            Console.WriteLine("---------------");
-            for (int i = 0; i < inventory.Count; i++)
+            Console.Clear();
+            Console.WriteLine("" +
+                " _____                     _                   \r\n" +
+                "|_   _|                   | |                  \r\n" +
+                "  | | _ ____   _____ _ __ | |_ ___  _ __ _   _ \r\n" +
+                "  | || '_ \\ \\ / / _ \\ '_ \\| __/ _ \\| '__| | | |\r\n" +
+                " _| || | | \\ V /  __/ | | | || (_) | |  | |_| |\r\n" +
+                " \\___/_| |_|\\_/ \\___|_| |_|\\__\\___/|_|   \\__, |\r\n" +
+                "                                          __/ |\r\n" +
+                "                                         |___/ ");
+            Console.WriteLine(" Slot │ Item ");
+            if (inventory.Count == 0)
             {
-                string item = string.IsNullOrEmpty(inventory[i]) ? "[Empty]" : inventory[i];
-                Console.WriteLine($"{i + 1,4} | {item}");
+                Console.WriteLine("──────┴────────");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Your inventory is empty!");
+                Console.ResetColor();
+                Console.WriteLine("Press enter to go back");
+                Console.ReadLine();
+                return;
             }
+            else
+            {
+                Console.WriteLine("──────┼────────");
+                for (int i = 0; i < inventory.Count; i++)
+                {
+                    string item = inventory[i];
+                    Console.WriteLine($"{i + 1,5} │ {item}");
+                }
+            }
+                
             Console.WriteLine();
 
             Console.WriteLine("What would you like to do?");
@@ -599,7 +628,7 @@ namespace FlavoursOfFallout
                             int healAmount = Convert.ToInt32(itemDetails[2]);
                             player.playerHP = player.playerHP + healAmount;
                             Console.WriteLine($"You used {itemDetails[0]} and healed for {healAmount} HP!");
-                            inventory[itemSlot] = "";
+                            inventory.RemoveAt(itemSlot);
                             Console.ReadLine();
                         }
                         else if (itemDetails.Length >= 3 && itemDetails[1] == "Explosive")
@@ -608,7 +637,7 @@ namespace FlavoursOfFallout
                             enemy.enemyHP = enemy.enemyHP - damageAmount;
                             Console.WriteLine("***HUGE EXPLOSIONS***");
                             Console.WriteLine($"You used {itemDetails[0]} against {enemy.enemyName} dealing {damageAmount} damage!");
-                            inventory[itemSlot] = "";
+                            inventory.RemoveAt(itemSlot);
                             Console.ReadLine();
                         }
                     }
@@ -630,7 +659,7 @@ namespace FlavoursOfFallout
                             player.playerWeapon = weaponDetails[0];
                             player.playerAttack = Convert.ToInt32(weaponDetails[1]);
                             Console.WriteLine($"You equipped {player.playerWeapon} with {player.playerAttack} attack power!");
-                            inventory[weaponSlot] = "";
+                            inventory.RemoveAt(weaponSlot);
                             Console.ReadLine();
                         }
                         else
@@ -651,7 +680,7 @@ namespace FlavoursOfFallout
                     dropSlot = Convert.ToInt32(temp) - 1;
                     if (dropSlot >= 0 && dropSlot < inventory.Count && !string.IsNullOrEmpty(inventory[dropSlot]))
                     {
-                        inventory[dropSlot] = "";
+                        inventory.RemoveAt(dropSlot);
                     }
                     else
                     {
