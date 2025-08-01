@@ -567,8 +567,16 @@ namespace FlavoursOfFallout
         static void DisplayInventory(ref Player player, ref Enemy enemy)
         {
             Console.Clear();
-            Console.WriteLine("Inventory:");
-            Console.WriteLine(" Slot │ Item");
+            Console.WriteLine("" +
+                " _____                     _                   \r\n" +
+                "|_   _|                   | |                  \r\n" +
+                "  | | _ ____   _____ _ __ | |_ ___  _ __ _   _ \r\n" +
+                "  | || '_ \\ \\ / / _ \\ '_ \\| __/ _ \\| '__| | | |\r\n" +
+                " _| || | | \\ V /  __/ | | | || (_) | |  | |_| |\r\n" +
+                " \\___/_| |_|\\_/ \\___|_| |_|\\__\\___/|_|   \\__, |\r\n" +
+                "                                          __/ |\r\n" +
+                "                                         |___/ ");
+            Console.WriteLine(" Slot │ Item ");
             if (inventory.Count == 0)
             {
                 Console.WriteLine("──────┴────────");
