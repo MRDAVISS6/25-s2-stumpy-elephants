@@ -5,7 +5,6 @@ using System.Runtime.Intrinsics.X86;
 using System.Text.RegularExpressions;
 using System.Threading.Channels;
 using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace FlavoursOfFallout
 {
