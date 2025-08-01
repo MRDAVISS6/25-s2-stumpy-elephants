@@ -27,7 +27,7 @@ namespace FlavoursOfFallout
         }
 
         public bool IsAlive => this.playerHP > 0;
-                
+
     }
 
     public struct Weapons()
@@ -65,7 +65,7 @@ namespace FlavoursOfFallout
     {
         public string recipeName;
         public string[] ingredients = new string[2];
-        
+
         public override string ToString()
         {
             return $"{recipeName} | Ingredient1: {ingredients[0]} -> Ingredient2: {ingredients[1]} -> Ingredient3: {ingredients[2]}";
@@ -366,11 +366,11 @@ namespace FlavoursOfFallout
                     string baseName = enemy.enemyName;
                     for (int i = 0; i < 5; i++)
                     {
-                        enemy.enemyName = baseName + $" #{i+1}"; // give each crow a number
+                        enemy.enemyName = baseName + $" #{i + 1}"; // give each crow a number
                         CombatSystem(ref player, enemy); //Fight 5 crows
                         if (!player.IsAlive) return;
                     }
-                    
+
                     Console.WriteLine("YOU'VE FOUND EPIC LOOT!");
                     Thread.Sleep(1000);
                     AcquireEpicLoot();
@@ -613,110 +613,111 @@ namespace FlavoursOfFallout
             while (!int.TryParse(temp, out choice))
             {
                 Console.WriteLine("invalid input");
-                 temp = Console.ReadLine();
-
-                switch (choice)
-                {
-                    case 1:
-                        Console.WriteLine("Enter the slot number of the item you want to use:");
-                        int itemSlot;
-                        int mSlot;
-                        temp = Console.ReadLine();
-                        while (!int.TryParse(temp, out itemSlot))
-                        {
-                            Console.WriteLine("invalid slot number");
-                            temp = Console.ReadLine();
-                            mSlot = itemSlot - 1;
-                        }
-                        if (itemSlot >= 0 && itemSlot < inventory.Count && !string.IsNullOrEmpty(inventory[itemSlot]))
-                        {
-                            string[] itemDetails = inventory[itemSlot].Split(" - ");    // Didn't change into a list as the .Split didn't like it
-                            if (itemDetails.Length >= 3 && itemDetails[1] == "Healing")
-                            {
-                                int healAmount = Convert.ToInt32(itemDetails[2]);
-                                player.playerHP = player.playerHP + healAmount;
-                                Console.WriteLine($"You used {itemDetails[0]} and healed for {healAmount} HP!");
-                                inventory.RemoveAt(itemSlot);
-                                Console.ReadLine();
-                            }
-                            else if (itemDetails.Length >= 3 && itemDetails[1] == "Explosive")
-                            {
-                                int damageAmount = Convert.ToInt32(itemDetails[2]);
-                                enemy.enemyHP = enemy.enemyHP - damageAmount;
-                                Console.WriteLine("***HUGE EXPLOSIONS***");
-                                Console.WriteLine($"You used {itemDetails[0]} against {enemy.enemyName} dealing {damageAmount} damage!");
-                                inventory.RemoveAt(itemSlot);
-                                Console.ReadLine();
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid slot number or empty slot.");
-                        }
-                        break;
-                    case 2:
-                        Console.WriteLine("Enter the slot number of the weapon you want to equip:");
-                        int weaponSlot;
-                        int Wslot;
-                        Console.ReadLine();
-                        while (!int.TryParse(temp, out weaponSlot))
-                        {
-                            Console.WriteLine("invalid slot number");
-                            temp = Console.ReadLine();
-                            Wslot = weaponSlot - 1;
-                        }
-                        if (weaponSlot >= 0 && weaponSlot < inventory.Count && !string.IsNullOrEmpty(inventory[weaponSlot]))
-                        {
-                            string[] weaponDetails = inventory[weaponSlot].Split(" - ");
-                            if (weaponDetails.Length >= 4)
-                            {
-                                player.playerWeapon = weaponDetails[0];
-                                player.playerAttack = Convert.ToInt32(weaponDetails[1]);
-                                Console.WriteLine($"You equipped {player.playerWeapon} with {player.playerAttack} attack power!");
-                                inventory.RemoveAt(weaponSlot);
-                                Console.ReadLine();
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid weapon details.");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid slot number or empty slot.");
-                        }
-                        break;
-
-                    case 3:
-                        Console.WriteLine("Enter the slot number of the item you want to drop:");
-                        int dropSlot;
-                        int dslot;
-                        Console.ReadLine();
-                        while (!int.TryParse(temp, out dropSlot))
-                        {
-                            Console.WriteLine("invalid slot number");
-                            temp = Console.ReadLine();
-                            dslot = dropSlot - 1;
-                        }
-                        if (dropSlot >= 0 && dropSlot < inventory.Count && !string.IsNullOrEmpty(inventory[dropSlot]))
-                        {
-                            inventory.RemoveAt(dropSlot);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid slot number or empty slot.");
-                        }
-                        break;
-
-                    case 4:
-                        Console.WriteLine("Returning to combat...");
-                        Thread.Sleep(1000);
-
-                        return;
-                }
+                temp = Console.ReadLine();
             }
+
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Enter the slot number of the item you want to use:");
+                    int itemSlot;
+                    int mSlot;
+                    temp = Console.ReadLine();
+                    while (!int.TryParse(temp, out itemSlot))
+                    {
+                        Console.WriteLine("invalid slot number");
+                        temp = Console.ReadLine();
+                        mSlot = itemSlot - 1;
+                    }
+                    if (itemSlot >= 0 && itemSlot < inventory.Count && !string.IsNullOrEmpty(inventory[itemSlot]))
+                    {
+                        string[] itemDetails = inventory[itemSlot].Split(" - ");    // Didn't change into a list as the .Split didn't like it
+                        if (itemDetails.Length >= 3 && itemDetails[1] == "Healing")
+                        {
+                            int healAmount = Convert.ToInt32(itemDetails[2]);
+                            player.playerHP = player.playerHP + healAmount;
+                            Console.WriteLine($"You used {itemDetails[0]} and healed for {healAmount} HP!");
+                            inventory.RemoveAt(itemSlot);
+                            Console.ReadLine();
+                        }
+                        else if (itemDetails.Length >= 3 && itemDetails[1] == "Explosive")
+                        {
+                            int damageAmount = Convert.ToInt32(itemDetails[2]);
+                            enemy.enemyHP = enemy.enemyHP - damageAmount;
+                            Console.WriteLine("***HUGE EXPLOSIONS***");
+                            Console.WriteLine($"You used {itemDetails[0]} against {enemy.enemyName} dealing {damageAmount} damage!");
+                            inventory.RemoveAt(itemSlot);
+                            Console.ReadLine();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid slot number or empty slot.");
+                    }
+                    break;
+                case 2:
+                    Console.WriteLine("Enter the slot number of the weapon you want to equip:");
+                    int weaponSlot;
+                    int Wslot;
+                    Console.ReadLine();
+                    while (!int.TryParse(temp, out weaponSlot))
+                    {
+                        Console.WriteLine("invalid slot number");
+                        temp = Console.ReadLine();
+                        Wslot = weaponSlot - 1;
+                    }
+                    if (weaponSlot >= 0 && weaponSlot < inventory.Count && !string.IsNullOrEmpty(inventory[weaponSlot]))
+                    {
+                        string[] weaponDetails = inventory[weaponSlot].Split(" - ");
+                        if (weaponDetails.Length >= 4)
+                        {
+                            player.playerWeapon = weaponDetails[0];
+                            player.playerAttack = Convert.ToInt32(weaponDetails[1]);
+                            Console.WriteLine($"You equipped {player.playerWeapon} with {player.playerAttack} attack power!");
+                            inventory.RemoveAt(weaponSlot);
+                            Console.ReadLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid weapon details.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid slot number or empty slot.");
+                    }
+                    break;
+
+                case 3:
+                    Console.WriteLine("Enter the slot number of the item you want to drop:");
+                    int dropSlot;
+                    int dslot;
+                    Console.ReadLine();
+                    while (!int.TryParse(temp, out dropSlot))
+                    {
+                        Console.WriteLine("invalid slot number");
+                        temp = Console.ReadLine();
+                        dslot = dropSlot - 1;
+                    }
+                    if (dropSlot >= 0 && dropSlot < inventory.Count && !string.IsNullOrEmpty(inventory[dropSlot]))
+                    {
+                        inventory.RemoveAt(dropSlot);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid slot number or empty slot.");
+                    }
+                    break;
+
+                case 4:
+                    Console.WriteLine("Returning to combat...");
+                    Thread.Sleep(1000);
+
+                    return;
+            }
+
         }
-        
+
 
         public static void AcquireEpicLoot()
         {
@@ -864,7 +865,7 @@ namespace FlavoursOfFallout
         }
 
 
-        
+
         public static void Collections()
         {
             // Collection of Things
@@ -1117,7 +1118,7 @@ namespace FlavoursOfFallout
 
                     case "5":
                         // Display all recipes in a readable format
-                        
+
                         Recipes[] recipes =
                         {
                             new Recipes { recipeName = "Toast", ingredients = new string[] { "Bread", "", "" } },
