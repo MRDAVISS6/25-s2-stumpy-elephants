@@ -26,7 +26,7 @@ namespace FlavoursOfFallout
             return $"Name: {playerName} | HP: {playerHP} | Weapon: {playerWeapon} | Attack: {playerAttack}";
         }
     }
-    
+
     public struct Weapons()
     {
         public string weaponName;
@@ -75,7 +75,7 @@ namespace FlavoursOfFallout
         private static Random random = new Random();
         private static int Task;
         public static string charName, cookbook = "";
-        public static List<string> inventory = new List<string>(); 
+        public static List<string> inventory = new List<string>();
         public static List<string> foodSatchel = new List<string>();
 
         static void Welcome()
@@ -219,9 +219,9 @@ namespace FlavoursOfFallout
             StartingArea(ref player);
 
         }
-         
+
         public static void StartingArea(ref Player player)
-        { 
+        {
             Console.Clear();
 
             Console.WriteLine("Starting Area - Russia, 2042");
@@ -244,7 +244,7 @@ namespace FlavoursOfFallout
 
         }
 
-    
+
         static void event1(ref Player player)
         {
             Console.WriteLine("Setting off on his journey, he finally makes it to Russia where he sees immense destruction everywhere." +
@@ -369,9 +369,9 @@ namespace FlavoursOfFallout
             {
                 case "f":
                     CombatSystem(ref player, enemy); //Fight 5 crows
-                    CombatSystem(ref player, enemy); 
-                    CombatSystem(ref player, enemy); 
-                    CombatSystem(ref player, enemy); 
+                    CombatSystem(ref player, enemy);
+                    CombatSystem(ref player, enemy);
+                    CombatSystem(ref player, enemy);
                     CombatSystem(ref player, enemy);
                     Console.WriteLine("YOU'VE FOUND EPIC LOOT!");
                     Thread.Sleep(1000);
@@ -380,7 +380,7 @@ namespace FlavoursOfFallout
                 case "r":
                     for (int i = 0; i < foodSatchel.Count; i++)
                     {
-                        if (foodSatchel[i] == "Meat" ||  foodSatchel[i] == "Fish")
+                        if (foodSatchel[i] == "Meat" || foodSatchel[i] == "Fish")
                         {
                             temp = foodSatchel[i];
                             foodSatchel.Remove(temp);
@@ -412,12 +412,12 @@ namespace FlavoursOfFallout
             CookingSystem.SatchelManage();
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
-            
+
         }
 
         static void endEvent(ref Player player)
         {
-            
+
             Console.WriteLine($"In the morning {charName} hears reports that there is a Military base near Moscow where a chef teacher is needed and they can use his help.");
             Console.WriteLine($"\nSo he went there and saw bunch of young soldiers eating any scraps they can get their hands on, " +
                 $"\nsome even psychoticly choosing to eat human flesh to survive." +
@@ -502,7 +502,7 @@ namespace FlavoursOfFallout
 
                 Console.WriteLine("1. Attack");
                 Console.WriteLine("2. Open Inventory");
-                
+
                 temp = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(temp) || !int.TryParse(temp, out choice))
                 {
@@ -533,7 +533,7 @@ namespace FlavoursOfFallout
                         }
 
 
-                        int eAttack = enemy.enemyAttack + random.Next(-2,3);
+                        int eAttack = enemy.enemyAttack + random.Next(-2, 3);
                         player.playerHP = player.playerHP - eAttack;
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine($"{enemy.enemyName} attacks {player.playerName} for {eAttack} damage!");
@@ -602,7 +602,7 @@ namespace FlavoursOfFallout
                     Console.WriteLine($"{i + 1,5} │ {item}");
                 }
             }
-                
+
             Console.WriteLine();
 
             Console.WriteLine("What would you like to do?");
@@ -613,91 +613,113 @@ namespace FlavoursOfFallout
 
             int choice;
             string temp = Console.ReadLine();
-            choice = Convert.ToInt32(temp);
-
-            switch (choice)
+            while (!int.TryParse(temp, out choice))
             {
-                case 1:
-                    Console.WriteLine("Enter the slot number of the item you want to use:");
-                    int itemSlot;
-                    temp = Console.ReadLine();
-                    itemSlot = Convert.ToInt32(temp) - 1;
-                    if (itemSlot >= 0 && itemSlot < inventory.Count && !string.IsNullOrEmpty(inventory[itemSlot]))
-                    {
-                        string[] itemDetails = inventory[itemSlot].Split(" - ");    // Didn't change into a list as the .Split didn't like it
-                        if (itemDetails.Length >= 3 && itemDetails[1] == "Healing")
+                Console.WriteLine("invalid input");
+                 temp = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine("Enter the slot number of the item you want to use:");
+                        int itemSlot;
+                        int mSlot;
+                        temp = Console.ReadLine();
+                        while (!int.TryParse(temp, out itemSlot))
                         {
-                            int healAmount = Convert.ToInt32(itemDetails[2]);
-                            player.playerHP = player.playerHP + healAmount;
-                            Console.WriteLine($"You used {itemDetails[0]} and healed for {healAmount} HP!");
-                            inventory.RemoveAt(itemSlot);
-                            Console.ReadLine();
+                            Console.WriteLine("invalid slot number");
+                            temp = Console.ReadLine();
+                            mSlot = itemSlot - 1;
                         }
-                        else if (itemDetails.Length >= 3 && itemDetails[1] == "Explosive")
+                        if (itemSlot >= 0 && itemSlot < inventory.Count && !string.IsNullOrEmpty(inventory[itemSlot]))
                         {
-                            int damageAmount = Convert.ToInt32(itemDetails[2]);
-                            enemy.enemyHP = enemy.enemyHP - damageAmount;
-                            Console.WriteLine("***HUGE EXPLOSIONS***");
-                            Console.WriteLine($"You used {itemDetails[0]} against {enemy.enemyName} dealing {damageAmount} damage!");
-                            inventory.RemoveAt(itemSlot);
-                            Console.ReadLine();
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid slot number or empty slot.");
-                    }
-                    break;
-                case 2:
-                    Console.WriteLine("Enter the slot number of the weapon you want to equip:");
-                    int weaponSlot;
-                    temp = Console.ReadLine();
-                    weaponSlot = Convert.ToInt32(temp) - 1;
-                    if (weaponSlot >= 0 && weaponSlot < inventory.Count && !string.IsNullOrEmpty(inventory[weaponSlot]))
-                    {
-                        string[] weaponDetails = inventory[weaponSlot].Split(" - ");
-                        if (weaponDetails.Length >= 4)
-                        {
-                            player.playerWeapon = weaponDetails[0];
-                            player.playerAttack = Convert.ToInt32(weaponDetails[1]);
-                            Console.WriteLine($"You equipped {player.playerWeapon} with {player.playerAttack} attack power!");
-                            inventory.RemoveAt(weaponSlot);
-                            Console.ReadLine();
+                            string[] itemDetails = inventory[itemSlot].Split(" - ");    // Didn't change into a list as the .Split didn't like it
+                            if (itemDetails.Length >= 3 && itemDetails[1] == "Healing")
+                            {
+                                int healAmount = Convert.ToInt32(itemDetails[2]);
+                                player.playerHP = player.playerHP + healAmount;
+                                Console.WriteLine($"You used {itemDetails[0]} and healed for {healAmount} HP!");
+                                inventory.RemoveAt(itemSlot);
+                                Console.ReadLine();
+                            }
+                            else if (itemDetails.Length >= 3 && itemDetails[1] == "Explosive")
+                            {
+                                int damageAmount = Convert.ToInt32(itemDetails[2]);
+                                enemy.enemyHP = enemy.enemyHP - damageAmount;
+                                Console.WriteLine("***HUGE EXPLOSIONS***");
+                                Console.WriteLine($"You used {itemDetails[0]} against {enemy.enemyName} dealing {damageAmount} damage!");
+                                inventory.RemoveAt(itemSlot);
+                                Console.ReadLine();
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("Invalid weapon details.");
+                            Console.WriteLine("Invalid slot number or empty slot.");
                         }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid slot number or empty slot.");
-                    }
-                    break;
+                        break;
+                    case 2:
+                        Console.WriteLine("Enter the slot number of the weapon you want to equip:");
+                        int weaponSlot;
+                        int Wslot;
+                        Console.ReadLine();
+                        while (!int.TryParse(temp, out weaponSlot))
+                        {
+                            Console.WriteLine("invalid slot number");
+                            temp = Console.ReadLine();
+                            Wslot = weaponSlot - 1;
+                        }
+                        if (weaponSlot >= 0 && weaponSlot < inventory.Count && !string.IsNullOrEmpty(inventory[weaponSlot]))
+                        {
+                            string[] weaponDetails = inventory[weaponSlot].Split(" - ");
+                            if (weaponDetails.Length >= 4)
+                            {
+                                player.playerWeapon = weaponDetails[0];
+                                player.playerAttack = Convert.ToInt32(weaponDetails[1]);
+                                Console.WriteLine($"You equipped {player.playerWeapon} with {player.playerAttack} attack power!");
+                                inventory.RemoveAt(weaponSlot);
+                                Console.ReadLine();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid weapon details.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid slot number or empty slot.");
+                        }
+                        break;
 
                     case 3:
-                    Console.WriteLine("Enter the slot number of the item you want to drop:");
-                    int dropSlot;
-                    temp = Console.ReadLine();
-                    dropSlot = Convert.ToInt32(temp) - 1;
-                    if (dropSlot >= 0 && dropSlot < inventory.Count && !string.IsNullOrEmpty(inventory[dropSlot]))
-                    {
-                        inventory.RemoveAt(dropSlot);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid slot number or empty slot.");
-                    }
-                    break;
+                        Console.WriteLine("Enter the slot number of the item you want to drop:");
+                        int dropSlot;
+                        int dslot;
+                        Console.ReadLine();
+                        while (!int.TryParse(temp, out dropSlot))
+                        {
+                            Console.WriteLine("invalid slot number");
+                            temp = Console.ReadLine();
+                            dslot = dropSlot - 1;
+                        }
+                        if (dropSlot >= 0 && dropSlot < inventory.Count && !string.IsNullOrEmpty(inventory[dropSlot]))
+                        {
+                            inventory.RemoveAt(dropSlot);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid slot number or empty slot.");
+                        }
+                        break;
 
-                case 4:
-                    Console.WriteLine("Returning to combat...");
-                    Thread.Sleep(1000);
-                    return;
+                    case 4:
+                        Console.WriteLine("Returning to combat...");
+                        Thread.Sleep(1000);
+
+                        return;
+                }
             }
-
-
         }
+        
 
         public static void AcquireEpicLoot()
         {
@@ -711,21 +733,21 @@ namespace FlavoursOfFallout
                 new Weapons { weaponName = "Jury-Rigged Laser Pistol", weaponDamage = 10, weaponType = "Energy", weaponRarity = "Common" },
                 new Weapons { weaponName = "Toxic Syringe Gun", weaponDamage = 11, weaponType = "Ranged", weaponRarity = "Common" },
                 new Weapons { weaponName = "Electrified Machete", weaponDamage = 12, weaponType = "Melee", weaponRarity = "Common" },
-            
+
                 new Weapons { weaponName = "Hunting Rifle", weaponDamage = 13, weaponType = "Ranged", weaponRarity = "Rare" },
                 new Weapons { weaponName = "Sawblade Launcher", weaponDamage = 14, weaponType = "Ranged", weaponRarity = "Rare" },
                 new Weapons { weaponName = "Combat Shotgun", weaponDamage = 15, weaponType = "Ranged", weaponRarity = "Rare" },
                 new Weapons { weaponName = "Flamer", weaponDamage = 16, weaponType = "Heavy", weaponRarity = "Rare" },
                 new Weapons { weaponName = "Super Sledge", weaponDamage = 17, weaponType = "Melee", weaponRarity = "Rare" },
                 new Weapons { weaponName = "Laser Musket", weaponDamage = 18, weaponType = "Energy", weaponRarity = "Rare" },
-            
+
                 new Weapons { weaponName = "Experimental Gauss Rifle", weaponDamage = 19, weaponType = "Energy", weaponRarity = "Epic" },
                 new Weapons { weaponName = "Tesla Cannon", weaponDamage = 20, weaponType = "Energy", weaponRarity = "Epic" },
                 new Weapons { weaponName = "Incendiary Chainsaw", weaponDamage = 21, weaponType = "Melee", weaponRarity = "Epic" },
                 new Weapons { weaponName = "Cryolator", weaponDamage = 22, weaponType = "Energy", weaponRarity = "Epic" },
                 new Weapons { weaponName = "Railway Rifle", weaponDamage = 23, weaponType = "Ranged", weaponRarity = "Epic" },
                 new Weapons { weaponName = "Auto-Axe", weaponDamage = 24, weaponType = "Melee", weaponRarity = "Epic" },
-            
+
                 new Weapons { weaponName = "Plague Injector", weaponDamage = 25, weaponType = "Ranged", weaponRarity = "*Legendary*" },
                 new Weapons { weaponName = "Hellfire Minigun", weaponDamage = 26, weaponType = "Heavy", weaponRarity = "*Legendary*" },
                 new Weapons { weaponName = "Quantum Disruptor", weaponDamage = 27, weaponType = "Energy", weaponRarity = "*Legendary*" },
@@ -773,7 +795,7 @@ namespace FlavoursOfFallout
 
             ];
 
-            int weaponLootRarity = random.Next(1,101);
+            int weaponLootRarity = random.Next(1, 101);
             int weaponLoot;
             int itemLoot1 = random.Next(items.Count);
             int itemLoot2 = random.Next(items.Count);
@@ -845,7 +867,7 @@ namespace FlavoursOfFallout
         }
 
 
-        
+
         public static void Task3()
         {
             // Collection of Things
@@ -867,7 +889,7 @@ namespace FlavoursOfFallout
                 Console.WriteLine();
                 Console.WriteLine("Please choose an option");
                 userInput = Console.ReadLine();
-                
+
 
                 Console.Clear();
 
