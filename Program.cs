@@ -566,21 +566,26 @@ namespace FlavoursOfFallout
 
         static void DisplayInventory(ref Player player, ref Enemy enemy)
         {
+            Console.Clear();
             Console.WriteLine("Inventory:");
-            Console.WriteLine("Slot | Item");
-            Console.WriteLine("---------------");
+            Console.WriteLine(" Slot │ Item");
             if (inventory.Count == 0)
             {
+                Console.WriteLine("──────┴────────");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Your inventory is empty!");
                 Console.ResetColor();
+                Console.WriteLine("Press enter to go back");
+                Console.ReadLine();
+                return;
             }
             else
             {
+                Console.WriteLine("──────┼────────");
                 for (int i = 0; i < inventory.Count; i++)
                 {
-                    string item = string.IsNullOrEmpty(inventory[i]) ? "[Empty]" : inventory[i];
-                    Console.WriteLine($"{i + 1,4} | {item}");
+                    string item = inventory[i];
+                    Console.WriteLine($"{i + 1,5} │ {item}");
                 }
             }
                 
