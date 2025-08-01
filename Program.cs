@@ -25,6 +25,9 @@ namespace FlavoursOfFallout
         {
             return $"Name: {playerName} | HP: {playerHP} | Weapon: {playerWeapon} | Attack: {playerAttack}";
         }
+
+        public bool IsAlive => this.playerHP > 0;
+                
     }
 
     public struct Weapons()
@@ -43,7 +46,7 @@ namespace FlavoursOfFallout
         public string ingredientName;
         public override string ToString()
         {
-            return $"Name: {ingredientName}";
+            return $"{ingredientName}";
         }
     }
     public struct Items()
@@ -61,12 +64,11 @@ namespace FlavoursOfFallout
     public struct Recipes()
     {
         public string recipeName;
-        public string ingredient1;
-        public string ingredient2;
-        public string ingredient3;
+        public string[] ingredients = new string[2];
+        
         public override string ToString()
         {
-            return $"{recipeName} | Ingredient1: {ingredient1} | Ingredient2: {ingredient2} | Ingredient3: {ingredient3}";
+            return $"{recipeName} | Ingredient1: {ingredients[0]} -> Ingredient2: {ingredients[1]} -> Ingredient3: {ingredients[2]}";
         }
     }
 
@@ -229,19 +231,6 @@ namespace FlavoursOfFallout
 
 
             event1(ref player);
-
-            event2(ref player);
-
-            event3(ref player);
-
-            event4(ref player);
-
-            event5(ref player);
-
-            endEvent(ref player);
-
-
-
         }
 
 
@@ -267,6 +256,7 @@ namespace FlavoursOfFallout
             Enemy enemy = Enemy.storyModeMonsters[15];
 
             CombatSystem(ref player, enemy);
+            if (!player.IsAlive) return;
 
             Console.WriteLine("YOU'VE FOUND EPIC LOOT!");
             Thread.Sleep(1000);
@@ -284,6 +274,8 @@ namespace FlavoursOfFallout
             Thread.Sleep(500);
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
+
+            event2(ref player);
         }
 
         static void event2(ref Player player)
@@ -306,6 +298,8 @@ namespace FlavoursOfFallout
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
             //end of event and he continues his journey
+
+            event3(ref player);
         }
 
         static void event3(ref Player player)
@@ -336,7 +330,7 @@ namespace FlavoursOfFallout
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
 
-
+            event4(ref player);
         }
 
         static void event4(ref Player player)
@@ -358,6 +352,7 @@ namespace FlavoursOfFallout
             //Console.Beep(213, 100);
             Enemy enemy = Enemy.storyModeMonsters[14];
             CombatSystem(ref player, enemy); //Crow fight
+            if (!player.IsAlive) return;
             Console.Clear();
             Console.WriteLine("You notice that the crow has given you bite marks. It seems that over time it has evolved teeth to chew through the armour plating that the military soldiers have." +
                 "\nIt seems that you have caused quite the commotion during your fight, and now all of the crows want to see what's going on");
@@ -368,11 +363,14 @@ namespace FlavoursOfFallout
             switch (input)
             {
                 case "f":
-                    CombatSystem(ref player, enemy); //Fight 5 crows
-                    CombatSystem(ref player, enemy);
-                    CombatSystem(ref player, enemy);
-                    CombatSystem(ref player, enemy);
-                    CombatSystem(ref player, enemy);
+                    string baseName = enemy.enemyName;
+                    for (int i = 0; i < 5; i++)
+                    {
+                        enemy.enemyName = baseName + $" #{i+1}"; // give each crow a number
+                        CombatSystem(ref player, enemy); //Fight 5 crows
+                        if (!player.IsAlive) return;
+                    }
+                    
                     Console.WriteLine("YOU'VE FOUND EPIC LOOT!");
                     Thread.Sleep(1000);
                     AcquireEpicLoot();
@@ -390,6 +388,8 @@ namespace FlavoursOfFallout
                     break;
             }
             Console.ReadLine();
+
+            event5(ref player);
         }
 
         static void event5(ref Player player)
@@ -400,7 +400,7 @@ namespace FlavoursOfFallout
             Console.WriteLine($"Coming down to meet the survivors, they instantly welcome {charName} into their community." +
                 $"\n{charName} explained their dream of helping people, and the survivors told them that they believed that" +
                 $"\none day a messiah would come to save us all, and that {charName} should eat a meal with them");
-            Console.WriteLine("They taught {charName} the recipe of Kutia | Rice -> Canned Fruits -> Flower Seeds");
+            Console.WriteLine($"They taught {charName} the recipe of Kutia | Rice -> Canned Fruits -> Flower Seeds");
             Console.ReadLine();
             cookbook = cookbook + "[Kutia | Rice -> Canned Fruits -> Flower Seeds] ";
             foodSatchel.Add("Rice");
@@ -413,6 +413,7 @@ namespace FlavoursOfFallout
             Console.WriteLine("Press any button to continue...");
             Console.ReadLine();
 
+            endEvent(ref player);
         }
 
         static void endEvent(ref Player player)
@@ -439,6 +440,7 @@ namespace FlavoursOfFallout
             Enemy enemy = Enemy.storyModeMonsters[3];
 
             CombatSystem(ref player, enemy);
+            if (!player.IsAlive) return;
 
             //fighting scene will come here
             Console.Clear();
@@ -539,18 +541,6 @@ namespace FlavoursOfFallout
                         Console.WriteLine($"{enemy.enemyName} attacks {player.playerName} for {eAttack} damage!");
                         //Console.Beep(200, 150);
                         Console.ResetColor();
-                        Thread.Sleep(700);
-
-                        if (player.playerHP <= 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"{player.playerName} has been defeated!");
-                            Console.ResetColor();
-
-                            Console.WriteLine("GAME OVER! Press Enter to exit...");
-                            Main();
-                        }
-
                         break;
 
                     case 2:
@@ -562,9 +552,16 @@ namespace FlavoursOfFallout
                         continue;
                 }
 
+                if (player.playerHP <= 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{player.playerName} has been defeated!");
+                    Console.ResetColor();
+                    break;
+                }
             }
-
-            Console.WriteLine("Combat ended. Press Enter to continue...");
+            if (!player.IsAlive) Console.WriteLine("GAME OVER! Press Enter to exit...");
+            else Console.WriteLine("Combat ended. Press Enter to continue...");
             Console.ReadLine();
 
         }
@@ -867,8 +864,8 @@ namespace FlavoursOfFallout
         }
 
 
-
-        public static void Task3()
+        
+        public static void Collections()
         {
             // Collection of Things
             string userInput;
@@ -916,10 +913,21 @@ namespace FlavoursOfFallout
                             new Enemy("Nuke Leech", 18, 3, "A glowing, slug-like parasite that feeds on radiation and attaches to living hosts.")
                         ];
                         Console.WriteLine("Monsters in the game:\n");
+                        Console.WriteLine("┌────────────────────────┬────────────────┬────────────────┬────────────────────────────────────────────────────────────────────────────────────────────┐");
+                        Console.Write("│Enemy Name".PadRight(24) + " ");
+                        Console.Write("│Enemy Health".PadRight(16) + " ");
+                        Console.Write("│Enemy Damage".PadRight(16) + " ");
+                        Console.WriteLine("│Description".PadRight(92) + " │");
+                        Console.WriteLine("├────────────────────────┼────────────────┼────────────────┼────────────────────────────────────────────────────────────────────────────────────────────┤");
+
                         foreach (var enemy in monsters)
                         {
-                            Console.WriteLine(enemy);
+                            Console.Write("│" + enemy.enemyName.PadRight(24));
+                            Console.Write("│" + enemy.enemyHP.ToString().PadRight(16));
+                            Console.Write("│" + enemy.enemyAttack.ToString().PadRight(16));
+                            Console.WriteLine("│" + enemy.enemyDesc.PadRight(92) + "│");
                         }
+                        Console.WriteLine("└────────────────────────┴────────────────┴────────────────┴────────────────────────────────────────────────────────────────────────────────────────────┘");
                         Console.WriteLine("\n-- Press any key to return to the collection menu --");
                         Console.ReadLine();
                         break;
@@ -967,35 +975,67 @@ namespace FlavoursOfFallout
 
                         Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Tier 1 Weapons:");
+                        Console.WriteLine("┌────────────────────────┬────────────────┬────────────────┐");
+                        Console.Write("│Weapon Name".PadRight(24) + " ");
+                        Console.Write("│Weapon Type".PadRight(16) + " ");
+                        Console.WriteLine("│Weapon Damage".PadRight(16) + " │");
+                        Console.WriteLine("├────────────────────────┼────────────────┼────────────────┤");
                         foreach (var weapon in tier1weapons)
                         {
-                            Console.WriteLine($"Name: {weapon.weaponName}, Damage: {weapon.weaponDamage}, Type: {weapon.weaponType}");
+                            Console.Write("│" + weapon.weaponName.PadRight(24));
+                            Console.Write("│" + weapon.weaponType.PadRight(16));
+                            Console.WriteLine("│" + weapon.weaponDamage.ToString().PadRight(16) + "│");
+
                         }
+                        Console.WriteLine("└────────────────────────┴────────────────┴────────────────┘");
                         Console.WriteLine();
 
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Tier 2 Weapons:");
+                        Console.WriteLine("┌────────────────────────┬────────────────┬────────────────┐");
+                        Console.Write("│Weapon Name".PadRight(24) + " ");
+                        Console.Write("│Weapon Type".PadRight(16) + " ");
+                        Console.WriteLine("│Weapon Damage".PadRight(16) + " │");
+                        Console.WriteLine("├────────────────────────┼────────────────┼────────────────┤");
                         foreach (var weapon in tier2weapons)
                         {
-                            Console.WriteLine($"Name: {weapon.weaponName}, Damage: {weapon.weaponDamage}, Type: {weapon.weaponType}");
+                            Console.Write("│" + weapon.weaponName.PadRight(24));
+                            Console.Write("│" + weapon.weaponType.PadRight(16));
+                            Console.WriteLine("│" + weapon.weaponDamage.ToString().PadRight(16) + "│");
                         }
+                        Console.WriteLine("└────────────────────────┴────────────────┴────────────────┘");
                         Console.WriteLine();
 
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("Tier 3 Weapons:");
+                        Console.WriteLine("┌────────────────────────┬────────────────┬────────────────┐");
+                        Console.Write("│Weapon Name".PadRight(24) + " ");
+                        Console.Write("│Weapon Type".PadRight(16) + " ");
+                        Console.WriteLine("│Weapon Damage".PadRight(16) + " │");
+                        Console.WriteLine("├────────────────────────┼────────────────┼────────────────┤");
                         foreach (var weapon in tier3weapons)
                         {
-                            Console.WriteLine($"Name: {weapon.weaponName}, Damage: {weapon.weaponDamage}, Type: {weapon.weaponType}");
+                            Console.Write("│" + weapon.weaponName.PadRight(24));
+                            Console.Write("│" + weapon.weaponType.PadRight(16));
+                            Console.WriteLine("│" + weapon.weaponDamage.ToString().PadRight(16) + "│");
                         }
+                        Console.WriteLine("└────────────────────────┴────────────────┴────────────────┘");
                         Console.WriteLine();
 
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("Tier 4 Weapons:");
+                        Console.WriteLine("┌────────────────────────┬────────────────┬────────────────┐");
+                        Console.Write("│Weapon Name".PadRight(24) + " ");
+                        Console.Write("│Weapon Type".PadRight(16) + " ");
+                        Console.WriteLine("│Weapon Damage".PadRight(16) + " │");
+                        Console.WriteLine("├────────────────────────┼────────────────┼────────────────┤");
                         foreach (var weapon in tier4weapons)
                         {
-                            Console.WriteLine($"Name: {weapon.weaponName}, Damage: {weapon.weaponDamage}, Type: {weapon.weaponType}");
+                            Console.Write("│" + weapon.weaponName.PadRight(24));
+                            Console.Write("│" + weapon.weaponType.PadRight(16));
+                            Console.WriteLine("│" + weapon.weaponDamage.ToString().PadRight(16) + "│");
                         }
-
+                        Console.WriteLine("└────────────────────────┴────────────────┴────────────────┘");
                         Console.ResetColor();
 
                         Console.WriteLine("\n-- Press any key to return to the collection menu --");
@@ -1018,10 +1058,21 @@ namespace FlavoursOfFallout
                         ];
 
                         Console.WriteLine("Items in the game:\n");
+                        Console.WriteLine("┌─────────────────────┬────────────────┬────────────────┬───────────────────────────────────────────────────────────────┐");
+                        Console.Write("│Item Name".PadRight(21) + " ");
+                        Console.Write("│Item Type".PadRight(16) + " ");
+                        Console.Write("│Item Effect".PadRight(16) + " ");
+                        Console.WriteLine("│Description".PadRight(63) + " │");
+                        Console.WriteLine("├─────────────────────┼────────────────┼────────────────┼───────────────────────────────────────────────────────────────┤");
+
                         foreach (var item in items)
                         {
-                            Console.WriteLine(item);
+                            Console.Write("│" + item.itemName.PadRight(21));
+                            Console.Write("│" + item.itemType.PadRight(16));
+                            Console.Write("│" + item.itemEffectValue.ToString().PadRight(16));
+                            Console.WriteLine("│" + item.itemDesc.PadRight(63) + "│");
                         }
+                        Console.WriteLine("└─────────────────────┴────────────────┴────────────────┴───────────────────────────────────────────────────────────────┘");
                         Console.WriteLine("\n-- Press any key to return to the collection menu --");
                         Console.ReadLine();
                         break;
@@ -1052,44 +1103,52 @@ namespace FlavoursOfFallout
                             new Ingredients { ingredientName = "Mutfruit" }
                         ];
                         Console.WriteLine("Ingredients in the game:\n");
+                        Console.WriteLine("┌─────────────────────┐");
+                        Console.WriteLine("│Ingredient Name      │");
+                        Console.WriteLine("├─────────────────────┤");
                         foreach (var ingredient in ingredients)
                         {
-                            Console.WriteLine(ingredient);
+                            Console.WriteLine($"│{ingredient}".PadRight(22) + "│");
                         }
+                        Console.WriteLine("└─────────────────────┘");
                         Console.WriteLine("\n-- Press any key to return to the collection menu --");
                         Console.ReadLine();
                         break;
 
                     case "5":
                         // Display all recipes in a readable format
-                        List<Recipes> recipes =
-                        [
-                            new Recipes { recipeName = "Russian Steak", ingredient1 = "Meat", ingredient2 = "Potato", ingredient3 = "Butter" },
-                            new Recipes { recipeName = "Nuka-Cola Cake", ingredient1 = "Flour", ingredient2 = "Sugar", ingredient3 = "Nuka-Cola" },
-                            new Recipes { recipeName = "Mutfruit Salad", ingredient1 = "Mutfruit", ingredient2 = "Lettuce", ingredient3 = "Tomato" },
-                            new Recipes { recipeName = "Radroach Stew", ingredient1 = "Radroach Meat", ingredient2 = "Potato", ingredient3 = "Carrot" },
-                            new Recipes { recipeName = "Wasteland Omelette", ingredient1 = "Egg", ingredient2 = "Cheese", ingredient3 = "Onion" },
-                            new Recipes { recipeName = "Mirelurk Pie", ingredient1 = "Mirelurk Meat", ingredient2 = "Potato", ingredient3 = "Salt" },
-                            new Recipes { recipeName = "Mutant Hound Jerky", ingredient1 = "Mutant Hound Meat", ingredient2 = "Salt", ingredient3 = "Pepper" },
-                            new Recipes { recipeName = "Ghoul Goulash", ingredient1 = "Ghoul Meat", ingredient2 = "Carrot", ingredient3 = "Onion" },
-                            new Recipes { recipeName = "Irradiated Apple Jam", ingredient1 = "Apple", ingredient2 = "Sugar", ingredient3 = "Jam" },
-                            new Recipes { recipeName = "Cheesy Potato Soup", ingredient1 = "Potato", ingredient2 = "Cheese", ingredient3 = "Drinkable Water" },
-                            new Recipes { recipeName = "Fried Fish Fillet", ingredient1 = "Fish", ingredient2 = "Butter", ingredient3 = "Salt" },
-                            new Recipes { recipeName = "Mushroom Stew", ingredient1 = "Mushroom", ingredient2 = "Onion", ingredient3 = "Drinkable Water" },
-                            new Recipes { recipeName = "Egg & Mutfruit Breakfast", ingredient1 = "Egg", ingredient2 = "Mutfruit", ingredient3 = "Milk" },
-                            new Recipes { recipeName = "Carrot & Potato Mash", ingredient1 = "Carrot", ingredient2 = "Potato", ingredient3 = "Butter" },
-                            new Recipes { recipeName = "Spicy Meat Skewer", ingredient1 = "Meat", ingredient2 = "Pepper", ingredient3 = "Onion" },
-                            new Recipes { recipeName = "Garlic Bread", ingredient1 = "Bread", ingredient2 = "Butter", ingredient3 = "Garlic" },
-                            new Recipes { recipeName = "Apple Pie", ingredient1 = "Apple", ingredient2 = "Flour", ingredient3 = "Butter" },
-                            new Recipes { recipeName = "Mutfruit Jam Toast", ingredient1 = "Toast", ingredient2 = "Mutfruit", ingredient3 = "Jam" },
-                            new Recipes { recipeName = "Rad-X Smoothie", ingredient1 = "Rad-X", ingredient2 = "Milk", ingredient3 = "Mutfruit" },
-                            new Recipes { recipeName = "Pepper Steak", ingredient1 = "Meat", ingredient2 = "Pepper", ingredient3 = "Butter" }
-                        ];
+                        
+                        Recipes[] recipes =
+                        {
+                            new Recipes { recipeName = "Toast", ingredients = new string[] { "Bread", "", "" } },
+                            new Recipes { recipeName = "Boiling Water", ingredients = new string[] { "Drinkable-Water", "", "" } },
+                            new Recipes { recipeName = "Jam Toast", ingredients = new string[] { "Toast", "Jam", "" } },
+                            new Recipes { recipeName = "Russian Steak", ingredients = new string[] { "Meat", "Bread", "Potato" } },
+                            new Recipes { recipeName = "Borscht", ingredients = new string[] { "Meat", "Onion", "Potato" } },
+                            new Recipes { recipeName = "Varennik", ingredients = new string[] { "Cheese", "Potato", "Eggs" } },
+                            new Recipes { recipeName = "Beef Stroganoff", ingredients = new string[] { "Meat", "Sour-Cream", "Onion" } },
+                            new Recipes { recipeName = "Solyanka", ingredients = new string[] { "Pickle", "Lemon", "Flour" } },
+                            new Recipes { recipeName = "Kutia", ingredients = new string[] { "Rice", "Canned-Fruit", "Flower-Seeds" } },
+                        }
+                        ;
+                        Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine("Recipes in the game:\n");
+
+                        Console.WriteLine("┌────────────────┬────────────────┬────────────────┬────────────────┐");
+                        Console.Write("│Recipe Name".PadRight(16) + " ");
+                        Console.Write("│Ingredient 1".PadRight(16) + " ");
+                        Console.Write("│Ingredient 2".PadRight(16) + " ");
+                        Console.WriteLine("│Ingredient 3".PadRight(16) + " │");
+                        Console.WriteLine("├────────────────┼────────────────┼────────────────┼────────────────┤");
+
                         foreach (var recipe in recipes)
                         {
-                            Console.WriteLine(recipe);
+                            Console.Write("│" + recipe.recipeName.PadRight(16));
+                            Console.Write("│" + recipe.ingredients[0].PadRight(16));
+                            Console.Write("│" + recipe.ingredients[1].PadRight(16));
+                            Console.WriteLine("│" + recipe.ingredients[2].PadRight(16) + "│");
                         }
+                        Console.WriteLine("└────────────────┴────────────────┴────────────────┴────────────────┘");
                         Console.WriteLine("\n-- Press any key to return to the collection menu --");
                         Console.ReadLine();
                         break;
@@ -1155,7 +1214,7 @@ namespace FlavoursOfFallout
                         break;
 
                     case 3:
-                        Task3();
+                        Collections();
                         break;
 
                     case 0:
