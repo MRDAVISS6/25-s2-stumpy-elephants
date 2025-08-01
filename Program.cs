@@ -541,6 +541,7 @@ namespace FlavoursOfFallout
                         Console.WriteLine($"{enemy.enemyName} attacks {player.playerName} for {eAttack} damage!");
                         //Console.Beep(200, 150);
                         Console.ResetColor();
+                        Thread.Sleep(700);
                         break;
 
                     case 2:
